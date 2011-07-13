@@ -3,23 +3,20 @@ package com.Bit4Tat;
 import org.junit.Test;
 import static org.junit.Assert.assertTrue;
 
-public class TickerTest {	
-	
+public class JSONTest {
+
 	@Test
-	public void testTickerObjectCreation() {
+	public void testJSONValidTickerParsing() {
 		JSONParser j = new JSONParser();
-		Ticker t = new Ticker();
 		
 		assertTrue(j != null);
-		assertTrue(t != null);		
 	}
-	
+
 	@Test
-	public void testTickerObjectValues() {
+	public void testJSONInvalidTickerParsing() {
 		JSONParser j = new JSONParser();
-		Ticker t = new Ticker();
 		
 		assertTrue(j != null);
-		assertTrue(t != null);
 	}
+
 }
