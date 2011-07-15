@@ -1,8 +1,12 @@
 package com.Bit4Tat;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLConnection;
 import java.net.URLEncoder;
 
 public class CoinPurse {
@@ -24,30 +28,37 @@ public class CoinPurse {
 		
 		public void CheckBalance (String name, String pass)
 		{
-			StringBuffer post_string = new StringBuffer();
-			post_string.append(CHECK_BALANCE);
-			try {
-				name = URLEncoder.encode(name,"UTF-8");
-			} catch (UnsupportedEncodingException e) {
-				e.printStackTrace();
-			}
-			
-			try {
-				pass = URLEncoder.encode(pass,"UTF-8");
-			} catch (UnsupportedEncodingException e) {
-				e.printStackTrace();
-			}
-			post_string.append("name=" + name + "&" + "pass=" + pass);
-			
-			URL post_url = null;
-			try 
-			{
-				post_url = new URL(CHECK_BALANCE);
-			} catch (MalformedURLException e) 
-			{
-				e.printStackTrace();
-			}
-			
-		}
+		StringBuffer returnString = new StringBuffer();
+		try {
+		   // Construct data
+		String data = URLEncoder.encode("name", "UTF-8") + "=" + URLEncoder.encode(name, "UTF-8");
+		   data += "&" + URLEncoder.encode("pass", "UTF-8") + "=" + URLEncoder.encode(pass, "UTF-8");
 
+		   System.out.println("post_string:");
+		System.out.println(data);
+		   
+		   // Send data
+		   URL url = new URL(CHECK_BALANCE);
+		   URLConnection conn = url.openConnection();
+		   conn.setDoOutput(true);
+		   OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
+		   wr.write(data);
+		   wr.flush();
+
+		   // Get the response
+		   BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+		   String line;
+		   while ((line = rd.readLine()) != null) {
+		       // Process line...
+		    System.out.println(line);
+		    returnString.append(line);
+		   }
+		   wr.close();
+		   rd.close();
+		} catch (Exception e) {
+		e.printStackTrace();
+		}
+		System.out.println(returnString.length());
+		System.out.println("End of check balance Function!");
+		}
 }

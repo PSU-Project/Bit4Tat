@@ -12,6 +12,8 @@ public class Bit4Tat {
 	public static void main(String[] args) {
 		// Welcome to Bit4Tat, the coolest evar
 		
+		CoinPurse cp = new CoinPurse();
+		cp.CheckBalance("Bit4Tat", "mgbit4tat");
 	}
 
 }
