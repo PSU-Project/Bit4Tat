@@ -2,13 +2,13 @@ package com.Bit4Tat;
 
 public class Ticker {
 
-	private float low;
-	private float high;
-	private float average;
-	private float volume;
-	private float last;
-	private float buy;
-	private float sell;
+	private double low;
+	private double high;
+	private double average;
+	private double volume;
+	private double last;
+	private double buy;
+	private double sell;
 	
 	/**
 	 * 
@@ -20,85 +20,85 @@ public class Ticker {
 	/**
 	 * @param low the low to set
 	 */
-	public void setLow(float low) {
+	public void setLow(double low) {
 		this.low = low;
 	}
 	/**
 	 * @return the low
 	 */
-	public float getLow() {
+	public double getLow() {
 		return low;
 	}
 	/**
 	 * @param high the high to set
 	 */
-	public void setHigh(float high) {
+	public void setHigh(double high) {
 		this.high = high;
 	}
 	/**
 	 * @return the high
 	 */
-	public float getHigh() {
+	public double getHigh() {
 		return high;
 	}
 	/**
 	 * @param average the average to set
 	 */
-	public void setAverage(float average) {
+	public void setAverage(double average) {
 		this.average = average;
 	}
 	/**
 	 * @return the average
 	 */
-	public float getAverage() {
+	public double getAverage() {
 		return average;
 	}
 	/**
 	 * @param volume the volume to set
 	 */
-	public void setVolume(float volume) {
+	public void setVolume(double volume) {
 		this.volume = volume;
 	}
 	/**
 	 * @return the volume
 	 */
-	public float getVolume() {
+	public double getVolume() {
 		return volume;
 	}
 	/**
 	 * @param last the last to set
 	 */
-	public void setLast(float last) {
+	public void setLast(double last) {
 		this.last = last;
 	}
 	/**
 	 * @return the last
 	 */
-	public float getLast() {
+	public double getLast() {
 		return last;
 	}
 	/**
 	 * @param buy the buy to set
 	 */
-	public void setBuy(float buy) {
+	public void setBuy(double buy) {
 		this.buy = buy;
 	}
 	/**
 	 * @return the buy
 	 */
-	public float getBuy() {
+	public double getBuy() {
 		return buy;
 	}
 	/**
 	 * @param sell the sell to set
 	 */
-	public void setSell(float sell) {
+	public void setSell(double sell) {
 		this.sell = sell;
 	}
 	/**
 	 * @return the sell
 	 */
-	public float getSell() {
+	public double getSell() {
 		return sell;
 	}
 }

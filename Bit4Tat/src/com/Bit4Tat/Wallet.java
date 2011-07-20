@@ -1,13 +1,35 @@
 package com.Bit4Tat;
 
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLConnection;
 import java.net.URLEncoder;
+import java.net.URLStreamHandlerFactory;
+import java.security.KeyManagementException;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
+import java.security.Security;
+import java.security.cert.CertificateException;
+import java.security.cert.X509Certificate;
+import java.util.Properties;
+
+import javax.net.ssl.HostnameVerifier;
+import javax.net.ssl.HttpsURLConnection;
+import javax.net.ssl.KeyManager;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLSession;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
 
 public class Wallet {
 	
-	private static final String CHECK_BALANCE 		= "https://mtgox.com/code/getFunds.php?";
+	private static final String CHECK_BALANCE 		= "https://mtgox.com/code/getFunds.php";
 	private static final String BUY_ORDER 			= "https://mtgox.com/code/buyBTC.php?name=blah&pass=blah&amount=#&price=#";
 	private static final String SELL_ORDER 			= "https://mtgox.com/code/sellBTC.php?name=blah&pass=blah&amount=#&price=#";
 	private static final String FETCH_OPEN_ORDERS 	= "https://mtgox.com/code/getOrders.php?name=blah&pass=blah";
@@ -27,9 +49,25 @@ public class Wallet {
 			setUser(user);
 			setPass(pass);
 			
+			HttpsURLConnection conn = setupConnection(CHECK_BALANCE);
+			try {
+				// Construct data
+				String data = URLEncoder.encode("name", "UTF-8") + "=" + URLEncoder.encode(user, "UTF-8");
+				data += "&" + URLEncoder.encode("pass", "UTF-8") + "=" + URLEncoder.encode(pass, "UTF-8");
+				
+				/*//Diagnostics
+				System.out.println("post_string:");
+				System.out.println(data);
+		   		*/
+				
+				getResponse(data, conn);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+	        conn.disconnect();
 		}
 		
-		public void CheckBalance (String name, String pass)
+		public void buy (double amount, double price)
 		{
 			
 		}
@@ -67,5 +105,4 @@ public class Wallet {
 		public String getPass() {
 			return _pass;
 		}
-
 }
