@@ -49,22 +49,6 @@ public class Wallet {
 			setUser(user);
 			setPass(pass);
 			
-			HttpsURLConnection conn = setupConnection(CHECK_BALANCE);
-			try {
-				// Construct data
-				String data = URLEncoder.encode("name", "UTF-8") + "=" + URLEncoder.encode(user, "UTF-8");
-				data += "&" + URLEncoder.encode("pass", "UTF-8") + "=" + URLEncoder.encode(pass, "UTF-8");
-				
-				/*//Diagnostics
-				System.out.println("post_string:");
-				System.out.println(data);
-		   		*/
-				
-				getResponse(data, conn);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-	        conn.disconnect();
 		}
 		
 		public void buy (double amount, double price)
