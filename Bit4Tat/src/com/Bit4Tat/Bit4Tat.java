@@ -9,9 +9,18 @@ public class Bit4Tat {
 	 * 
 	 */
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) 
+	{
 		// Welcome to Bit4Tat, the coolest evar
+		SchedulerGateway simpleScheduler = new DefaultScheduler();
 		
+		Wallet coinPurse = new Wallet("Bit4Tat", "mgbit4tat");
+		coinPurse.changeService("mtgox");
+		
+		//this kind of crazy talk is on the chopping block
+		coinPurse.getPayGate().printCurrentProcessor();
+		
+		simpleScheduler.pollBalance(coinPurse);
 
 	}
 
