@@ -13,6 +13,10 @@ public class JSONParser {
 		
 	}
 	
+	public JSONParser (String s) {
+		
+	}
+	
 	public Ticker getTicker (JsonObject j) throws IOException {
 		
 		String[] tickerProperties = {"high", "low", "avg", "vol", "last", "buy", "sell"};
@@ -44,4 +48,6 @@ public class JSONParser {
 		
 		return t;
 	}
+	
+	
 }
