@@ -1,5 +1,7 @@
 package com.Bit4Tat;
 
+import java.util.Date;
+
 public class Bit4Tat {
 
 	/**
@@ -12,7 +14,7 @@ public class Bit4Tat {
 	static final String PASS = "mgbit4tat";
 	
 	public static void main(String[] args) 
-	{
+	{			
 		// Welcome to Bit4Tat, the coolest evar
 		SchedulerGateway simpleScheduler = new DefaultScheduler();
 		
@@ -22,7 +24,7 @@ public class Bit4Tat {
 		//this kind of crazy talk is on the chopping block
 		coinPurse.getPayGate().printCurrentProcessor();
 		
-		simpleScheduler.pollBalance(coinPurse);
+		coinPurse = simpleScheduler.pollBalance(coinPurse);
 
 	}
 

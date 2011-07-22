@@ -77,9 +77,11 @@ public class PaymentProcessorForMtGox extends PaymentService
 	}
 	
 	@Override
-	public void pay(double amount) 
+	public void buy(double amount) 
 	{
 		// TODO Auto-generated method stub
+		
+		System.out.println("You tried to buy " + amount + " of bitcoins.");
 		
 	}
 	@Override

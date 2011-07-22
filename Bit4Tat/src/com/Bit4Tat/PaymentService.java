@@ -8,7 +8,7 @@ public abstract class PaymentService
 	 * @param amount
 	 * @return
 	 */
-	public abstract void pay (double amount);
+	public abstract void buy (double amount);
 	/**
 	 * 
 	 * @param 

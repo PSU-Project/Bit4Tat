@@ -4,11 +4,16 @@ public abstract class SchedulerGateway
 {
 	/**
 	 * Description here
+	 */
+	public abstract void doWork();
+	
+	/**
+	 * Description here
 	 * @param null
 	 * @param null
 	 * @return
 	 */
-	public abstract void conditionalBuy(Wallet cred, double amount);
+	public abstract void conditionalBuy(Wallet w, Object trigger, int action, double amount, Object expires);
 	
 	/**
 	 * Description here
@@ -24,7 +29,7 @@ public abstract class SchedulerGateway
 	 * @param null
 	 * @return
 	 */
-	public abstract void pollBalance(Wallet cred);
+	public abstract Wallet pollBalance(Wallet cred);
 	
 	/**
 	 * Print the currently used Scheduler
