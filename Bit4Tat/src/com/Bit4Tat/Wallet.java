@@ -29,6 +29,12 @@ public class Wallet {
 			
 		}
 		
+		public void sell (double amount, double price)
+		{
+			payGate.useMtGox();
+			payGate.service.sell(this, price, amount);
+		}
+		
 		public void changeService (String service)
 		{
 			if (service == SERVICES[0])

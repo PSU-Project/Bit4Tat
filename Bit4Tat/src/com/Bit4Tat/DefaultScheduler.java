@@ -54,7 +54,8 @@ public class DefaultScheduler extends SchedulerGateway
 							case BUY:							
 								t.w.getPayGate().service.buy(t.amount);
 							case SELL:
-								t.w.getPayGate().service.sell(t.amount);
+								//TODO argument change in sell
+								//t.w.getPayGate().service.sell(t.amount);
 						}
 						
 						// Poll the new balance after each completed transaction
@@ -95,7 +96,7 @@ public class DefaultScheduler extends SchedulerGateway
 	{
 		// TODO Auto-generated method stub
 		
-		cred.getPayGate().service.checkBalance(cred.getUser(), cred.getPass());
+		cred.getPayGate().service.checkBalance(cred);
 		return cred;
 		
 	}

@@ -14,14 +14,14 @@ public abstract class PaymentService
 	 * @param 
 	 * @return
 	 */
-	public abstract void sell (double amount);
+	public abstract void sell (Wallet w, double amount, double price);
 	/**
 	 * 
 	 * @param response
 	 * @param amount
 	 * @return
 	 */
-	public abstract void checkBalance (String user, String pass);
+	public abstract void checkBalance (Wallet w);
 	
 	public abstract void printService();
 	
