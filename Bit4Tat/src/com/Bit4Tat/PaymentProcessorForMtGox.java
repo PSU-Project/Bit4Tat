@@ -43,7 +43,7 @@ import javax.net.ssl.X509TrustManager;
 public class PaymentProcessorForMtGox extends PaymentService
 {
 	private static final String CHECK_BALANCE 		= "https://mtgox.com/code/getFunds.php?";
-	private static final String BUY_ORDER 			= "https://mtgox.com/code/buyBTC.php?name=blah&pass=blah&amount=#&price=#";
+	private static final String BUY_ORDER 			= "https://mtgox.com/code/buyBTC.php?";
 	private static final String SELL_ORDER 			= "https://mtgox.com/code/sellBTC.php?name=blah&pass=blah&amount=#&price=#";
 	private static final String FETCH_OPEN_ORDERS 	= "https://mtgox.com/code/getOrders.php?name=blah&pass=blah";
 	private static final String CANCEL_ORDER 		= "https://mtgox.com/code/cancelOrder.php?name=blah&pass=blah&oid=#&type=#";
@@ -55,14 +55,14 @@ public class PaymentProcessorForMtGox extends PaymentService
 	}
 	
 	@Override
-	public void checkBalance(String user, String pass) 
+	public void checkBalance(Wallet w) 
 	{
 		HttpsURLConnection conn = setupConnection(CHECK_BALANCE);
 
 		try {
 		// Construct data
-		String data = URLEncoder.encode("name", "UTF-8") + "=" + URLEncoder.encode(user, "UTF-8");
-		data += "&" + URLEncoder.encode("pass", "UTF-8") + "=" + URLEncoder.encode(pass, "UTF-8");
+		String data = URLEncoder.encode("name", "UTF-8") + "=" + URLEncoder.encode(w.getUser(), "UTF-8");
+		data += "&" + URLEncoder.encode("pass", "UTF-8") + "=" + URLEncoder.encode(w.getPass(), "UTF-8");
 
 		/*//Diagnostics
 		System.out.println("post_string:");
@@ -77,13 +77,33 @@ public class PaymentProcessorForMtGox extends PaymentService
 	}
 	
 	@Override
-	public void buy(double amount) 
+	public void buy(Wallet w, double amount, double price) 
 	{
-		// TODO Auto-generated method stub
-		
-		System.out.println("You tried to buy " + amount + " of bitcoins.");
-		
+		// Uses user credentials (user, pass) to purchase an amount of bitcoins.
+		// Set up connection
+		HttpsURLConnection conn = setupConnection(BUY_ORDER);
+		try 
+		{
+			// instantiate username and password
+			String user = w.getUser();
+			String pass = w.getPass();
+			// Assemble the user, pass, amount, and price to tack onto conn
+			String data = URLEncoder.encode("name", "UTF-8") + "=" + URLEncoder.encode(user, "UTF-8");
+			data += "&" + URLEncoder.encode("pass", "UTF-8") + "=" + URLEncoder.encode(pass, "UTF-8");
+			data += "&" + URLEncoder.encode("amount", "UTF-8") + "=" + URLEncoder.encode(Double.toString(amount), "UTF-8");
+			data += "&" + URLEncoder.encode("price", "UTF-8") + "=" + URLEncoder.encode(Double.toString(price), "UTF-8");
+			// Pass to MtGox
+			getResponse(data, conn);
+		}
+		// if there are errors, print a stack trace
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+		}
+		// disconnect
+		conn.disconnect();
 	}
+	
 	@Override
 	public void printService() 
 	{
@@ -91,10 +111,32 @@ public class PaymentProcessorForMtGox extends PaymentService
 		
 	}
 	@Override
-	public void sell(double amount) 
+	public void sell(Wallet w, double amount, double price) 
 	{
 		// TODO Auto-generated method stub
+		HttpsURLConnection conn = setupConnection(SELL_ORDER);
+
+		//System.out.println(new java.text.DecimalFormat("0.00").format(45.63563564));
 		
+		try {
+		// Construct data
+		String data = URLEncoder.encode("name", "UTF-8") + "=" + URLEncoder.encode(w.getUser(), "UTF-8");
+		data += "&" + URLEncoder.encode("pass", "UTF-8") + "=" + URLEncoder.encode(w.getPass(), "UTF-8");
+		data += "&" + URLEncoder.encode("amount", "UTF-8") + "=" + 
+				URLEncoder.encode(new java.text.DecimalFormat("0.00").format(amount), "UTF-8");
+		data += "&" + URLEncoder.encode("price", "UTF-8") + "=" + 
+				URLEncoder.encode(new java.text.DecimalFormat("0.00").format(price), "UTF-8");
+		/*
+		//Diagnostics
+		System.out.println("post_string:");
+		System.out.println(data);
+		*/
+
+		getResponse(data, conn);
+		} catch (Exception e) {
+		e.printStackTrace();
+		}
+		conn.disconnect();
 	}
 	private static class DefaultTrustManager implements X509TrustManager
 	{
