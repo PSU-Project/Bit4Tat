@@ -8,7 +8,7 @@ public abstract class PaymentService
 	 * @param amount
 	 * @return
 	 */
-	public abstract void buy (double amount);
+	public abstract void buy (Wallet w, double amount, double price);
 	/**
 	 * 
 	 * @param 
@@ -27,5 +27,6 @@ public abstract class PaymentService
 	
 	//Payment Services
 	public static final String MTGOX = "Mt Gox";
+	public static final String TRADEHILL = "Tradehill";
 	public static final String OTHER = "other";
 }

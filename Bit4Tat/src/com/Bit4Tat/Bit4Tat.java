@@ -25,6 +25,7 @@ public class Bit4Tat {
 		coinPurse.getPayGate().printCurrentProcessor();
 		
 		coinPurse = simpleScheduler.pollBalance(coinPurse);
+		coinPurse.buy(0,0);
 
 	}
 

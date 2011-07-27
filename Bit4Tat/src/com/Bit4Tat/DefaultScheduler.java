@@ -52,7 +52,9 @@ public class DefaultScheduler extends SchedulerGateway
 						switch (t.action) {
 						
 							case BUY:							
-								t.w.getPayGate().service.buy(t.amount);
+								//t.w.getPayGate().service.buy(t.amount);
+								//t.w.buy(t.amount, 0);
+								//TODO: implement a way to do price too
 							case SELL:
 								t.w.getPayGate().service.sell(t.amount);
 						}
