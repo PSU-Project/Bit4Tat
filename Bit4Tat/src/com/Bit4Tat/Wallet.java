@@ -26,7 +26,15 @@ public class Wallet {
 		
 		public void buy (double amount, double price)
 		{
-			
+			// Check the service and use the appropriate purchasing method
+			if (payGate.service instanceof PaymentProcessorForMtGox)
+			{
+				payGate.service.buy(this, amount, price);
+			}
+			else
+			{
+				// TODO implement payment processors for other exchanges
+			}
 		}
 		
 		public void sell (double amount, double price)
