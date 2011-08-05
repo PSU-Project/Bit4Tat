@@ -1,7 +1,8 @@
-package com.Bit4Tat;
+package test.Bit4Tat;
 
 import org.junit.Test;
 import static org.junit.Assert.assertTrue;
+import com.Bit4Tat.*;
 
 public class JSONTest {
 

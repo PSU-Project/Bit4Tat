@@ -1,11 +1,9 @@
-package com.Bit4Tat;
+package test.Bit4Tat;
 
 import java.io.IOException;
-
+import com.Bit4Tat.*;
 import org.junit.Test;
-
 import com.google.gson.JsonObject;
-
 import static org.junit.Assert.assertTrue;
 
 public class TickerTest {	
