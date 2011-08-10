@@ -2,13 +2,10 @@ package com.Bit4Tat;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.awt.RenderingHints;
 import java.awt.event.MouseAdapter;
@@ -16,7 +13,6 @@ import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Hashtable;
 
 import javax.imageio.ImageIO;
@@ -27,16 +23,12 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import javax.swing.SwingConstants;
 
 public class BitPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	private static final Color headerColor = new Color(240, 240, 240);
-	private static final Color lightHeaderColor = new Color(250, 250, 250);
 	private static final Color rolloverColor = new Color(245, 245, 255);
 	
 	Hashtable<String, BitPanel> panelList;
@@ -59,73 +51,20 @@ public class BitPanel extends JPanel {
 
 		public FilePanel() {
 			
-			this.setLayout(new GridBagLayout());
+			this.setLayout(new BorderLayout());
 			this.setBackground(Color.WHITE);
-						
-			BufferedImage cornerLogo = null;			
-			JLabel cornerLabel = null;			
-
-			GridBagConstraints cornerBoxConstraints = new GridBagConstraints();
-			cornerBoxConstraints.gridx = 0;
-			cornerBoxConstraints.gridy = 0;
 			
-			try {
-				//String cwd = System.getProperty("user.dir");
+			this.add(createHeaderPanel("file_small.png", "File"), BorderLayout.NORTH);						
+			this.add(createSidePanel("Header", "New Wallet", "Edit Wallet", "Load Wallet", "Save Wallet"), BorderLayout.WEST);						
 
-				File f = new File(System.getProperty("user.dir") + File.separator + "res" + File.separator + "file_small.png");
-				//System.out.println(f.getPath());
-				cornerLogo = ImageIO.read(f);
-			} catch (IOException e) {
-				System.err.println("There was a problem reading file_small.png from the disk.  Is it in the correct location?");
-				e.printStackTrace();
-			}
+			JPanel panel = new JPanel();
+			panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+			panel.add(Box.createRigidArea(new Dimension(10, 0)));
+			panel.add(Box.createRigidArea(new Dimension(0, 10)));			
+			panel.setBackground(Color.WHITE);
+			panel.setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0, Color.DARK_GRAY));
 			
-			if (cornerLogo != null) {
-				cornerLabel = new JLabel(new ImageIcon(cornerLogo));
-			}
-			else {
-				cornerLabel = new JLabel();
-			}			
-			
-			this.add(cornerLabel, cornerBoxConstraints);
-			
-			GridBagConstraints fileBoxHeaderConstraints = new GridBagConstraints();			
-			JTextField fileBoxHeader = new JTextField() {            
-
-				private static final long serialVersionUID = 1L;
-
-				@Override
-	            public void paintComponent(Graphics g) {
-	                Graphics2D graphics2d = (Graphics2D) g;
-	                graphics2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
-	                        RenderingHints.VALUE_ANTIALIAS_ON);
-	                super.paintComponent(g);
-	            }
-			};
-			
-			fileBoxHeader.setText("File");
-			fileBoxHeader.setHorizontalAlignment(JTextField.LEFT);
-			fileBoxHeader.setFont(new Font("Verdana", Font.BOLD, 72));
-			fileBoxHeader.setEditable(false);
-			fileBoxHeader.setOpaque(false);
-			fileBoxHeader.setFocusable(false);
-			fileBoxHeader.setBorder(BorderFactory.createEmptyBorder());
-			fileBoxHeaderConstraints.gridx = 1;
-			fileBoxHeaderConstraints.gridy = 0;
-			fileBoxHeaderConstraints.weightx = 0.5;
-			fileBoxHeaderConstraints.weighty = 0;
-			this.add(fileBoxHeader, fileBoxHeaderConstraints);
-
-			JPanel fileTextPanel = new JPanel();
-			GridBagConstraints fileTextPanelConstraints = new GridBagConstraints();
-			fileTextPanel.setBackground(Color.WHITE);
-			fileTextPanelConstraints.gridx = 0;
-			fileTextPanelConstraints.gridy = 1;
-			fileTextPanelConstraints.gridheight = 2;
-			fileTextPanelConstraints.gridwidth = 3;
-			fileTextPanelConstraints.weighty = 0.5;
-			fileTextPanelConstraints.fill = GridBagConstraints.BOTH;
-			this.add(fileTextPanel, fileTextPanelConstraints);						
+			this.add(panel);						
 		}		
 	}
 	
@@ -135,74 +74,20 @@ public class BitPanel extends JPanel {
 		
 		public OptionsPanel() {
 			
-			this.setLayout(new GridBagLayout());
+			this.setLayout(new BorderLayout());
 			this.setBackground(Color.WHITE);
-						
-			BufferedImage cornerLogo = null;			
-			JLabel cornerLabel = null;			
+			
+			this.add(createHeaderPanel("options_small.png", "Options"), BorderLayout.NORTH);						
+			this.add(createSidePanel("Header", "Option 1", "Option 2", "Option 3", "Option 4"), BorderLayout.WEST);						
 
-			GridBagConstraints cornerBoxConstraints = new GridBagConstraints();
-			cornerBoxConstraints.gridx = 0;
-			cornerBoxConstraints.gridy = 0;
+			JPanel panel = new JPanel();
+			panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+			panel.add(Box.createRigidArea(new Dimension(10, 0)));
+			panel.add(Box.createRigidArea(new Dimension(0, 10)));			
+			panel.setBackground(Color.WHITE);
+			panel.setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0, Color.DARK_GRAY));
 			
-			try {
-				//String cwd = System.getProperty("user.dir");
-
-				File f = new File(System.getProperty("user.dir") + File.separator + "res" + File.separator + "options_small.png");
-				//System.out.println(f.getPath());
-				cornerLogo = ImageIO.read(f);
-			} catch (IOException e) {
-				System.err.println("There was a problem reading options_small.png from the disk.  Is it in the correct location?");
-				e.printStackTrace();
-			}
-			
-			if (cornerLogo != null) {
-				cornerLabel = new JLabel(new ImageIcon(cornerLogo));
-			}
-			else {
-				cornerLabel = new JLabel();
-			}			
-			
-			this.add(cornerLabel, cornerBoxConstraints);
-			
-			GridBagConstraints optionsBoxHeaderConstraints = new GridBagConstraints();			
-			JTextField optionBoxHeader = new JTextField() {            
-
-				private static final long serialVersionUID = 1L;
-
-				@Override
-	            public void paintComponent(Graphics g) {
-	                Graphics2D graphics2d = (Graphics2D) g;
-	                graphics2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
-	                        RenderingHints.VALUE_ANTIALIAS_ON);
-	                super.paintComponent(g);
-	            }
-			};
-			
-			optionBoxHeader.setText("Options");
-			optionBoxHeader.setHorizontalAlignment(JTextField.LEFT);
-			optionBoxHeader.setFont(new Font("Verdana", Font.BOLD, 72));
-			optionBoxHeader.setEditable(false);
-			optionBoxHeader.setOpaque(false);
-			optionBoxHeader.setFocusable(false);
-			optionBoxHeader.setBorder(BorderFactory.createEmptyBorder());
-			optionsBoxHeaderConstraints.gridx = 1;
-			optionsBoxHeaderConstraints.gridy = 0;
-			optionsBoxHeaderConstraints.weightx = 0.5;
-			optionsBoxHeaderConstraints.weighty = 0;
-			this.add(optionBoxHeader, optionsBoxHeaderConstraints);
-
-			JPanel optionTextPanel = new JPanel();
-			GridBagConstraints optionTextPanelConstraints = new GridBagConstraints();
-			optionTextPanel.setBackground(Color.WHITE);
-			optionTextPanelConstraints.gridx = 0;
-			optionTextPanelConstraints.gridy = 1;
-			optionTextPanelConstraints.gridheight = 2;
-			optionTextPanelConstraints.gridwidth = 3;
-			optionTextPanelConstraints.weighty = 0.5;
-			optionTextPanelConstraints.fill = GridBagConstraints.BOTH;
-			this.add(optionTextPanel, optionTextPanelConstraints);			
-			
+			this.add(panel);			
 		}
 	}
 
@@ -212,73 +97,20 @@ public class BitPanel extends JPanel {
 		
 		public HelpPanel() {
 			
-			this.setLayout(new GridBagLayout());
+			this.setLayout(new BorderLayout());
 			this.setBackground(Color.WHITE);
-						
-			BufferedImage cornerLogo = null;			
-			JLabel cornerLabel = null;			
-
-			GridBagConstraints cornerBoxConstraints = new GridBagConstraints();
-			cornerBoxConstraints.gridx = 0;
-			cornerBoxConstraints.gridy = 0;
 			
-			try {
-				//String cwd = System.getProperty("user.dir");
+			this.add(createHeaderPanel("help_small.png", "Help"), BorderLayout.NORTH);						
+			this.add(createSidePanel("Help Topics", "Wallet Management", "Adding Exchanges"), BorderLayout.WEST);						
 
-				File f = new File(System.getProperty("user.dir") + File.separator + "res" + File.separator + "help_small.png");
-				//System.out.println(f.getPath());
-				cornerLogo = ImageIO.read(f);
-			} catch (IOException e) {
-				System.err.println("There was a problem reading help_small.png from the disk.  Is it in the correct location?");
-				e.printStackTrace();
-			}
+			JPanel panel = new JPanel();
+			panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+			panel.add(Box.createRigidArea(new Dimension(10, 0)));
+			panel.add(Box.createRigidArea(new Dimension(0, 10)));			
+			panel.setBackground(Color.WHITE);
+			panel.setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0, Color.DARK_GRAY));
 			
-			if (cornerLogo != null) {
-				cornerLabel = new JLabel(new ImageIcon(cornerLogo));
-			}
-			else {
-				cornerLabel = new JLabel();
-			}			
-			
-			this.add(cornerLabel, cornerBoxConstraints);
-			
-			GridBagConstraints helpBoxHeaderConstraints = new GridBagConstraints();			
-			JTextField helpBoxHeader = new JTextField() {            
-
-				private static final long serialVersionUID = 1L;
-
-				@Override
-	            public void paintComponent(Graphics g) {
-	                Graphics2D graphics2d = (Graphics2D) g;
-	                graphics2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
-	                        RenderingHints.VALUE_ANTIALIAS_ON);
-	                super.paintComponent(g);
-	            }
-			};
-			
-			helpBoxHeader.setText("Help");
-			helpBoxHeader.setHorizontalAlignment(JTextField.LEFT);
-			helpBoxHeader.setFont(new Font("Verdana", Font.BOLD, 72));
-			helpBoxHeader.setEditable(false);
-			helpBoxHeader.setOpaque(false);
-			helpBoxHeader.setFocusable(false);
-			helpBoxHeader.setBorder(BorderFactory.createEmptyBorder());
-			helpBoxHeaderConstraints.gridx = 1;
-			helpBoxHeaderConstraints.gridy = 0;
-			helpBoxHeaderConstraints.weightx = 0.5;
-			helpBoxHeaderConstraints.weighty = 0;
-			this.add(helpBoxHeader, helpBoxHeaderConstraints);
-
-			JPanel helpTextPanel = new JPanel();
-			GridBagConstraints helpTextPanelConstraints = new GridBagConstraints();
-			helpTextPanel.setBackground(Color.WHITE);
-			helpTextPanelConstraints.gridx = 0;
-			helpTextPanelConstraints.gridy = 1;
-			helpTextPanelConstraints.gridheight = 2;
-			helpTextPanelConstraints.gridwidth = 3;
-			helpTextPanelConstraints.weighty = 0.5;
-			helpTextPanelConstraints.fill = GridBagConstraints.BOTH;
-			this.add(helpTextPanel, helpTextPanelConstraints);
+			this.add(panel);
 		}		
 	}
 	
@@ -294,12 +126,12 @@ public class BitPanel extends JPanel {
 			this.add(createHeaderPanel("logo_small.png", "Wallet"), BorderLayout.NORTH);						
 			this.add(createSidePanel("Exchanges", "Mt. Gox", "Tradehill"), BorderLayout.WEST);
 						
-			JPanel walletPanel = new JPanel();
-			walletPanel.setLayout(new BoxLayout(walletPanel, BoxLayout.Y_AXIS));
-			walletPanel.add(Box.createRigidArea(new Dimension(10, 0)));
-			walletPanel.add(Box.createRigidArea(new Dimension(0, 10)));			
-			walletPanel.setBackground(Color.WHITE);
-			walletPanel.setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0, Color.DARK_GRAY));
+			JPanel panel = new JPanel();
+			panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+			panel.add(Box.createRigidArea(new Dimension(10, 0)));
+			panel.add(Box.createRigidArea(new Dimension(0, 10)));			
+			panel.setBackground(Color.WHITE);
+			panel.setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0, Color.DARK_GRAY));
 			
 			BufferedImage balanceLogo = null;
 			
@@ -314,8 +146,8 @@ public class BitPanel extends JPanel {
 						
 			JLabel balanceText = new JLabel("Balance");
 			balanceText.setFont(new Font("Verdana", Font.BOLD, 32));			
-			walletPanel.add(balanceText);
-			walletPanel.add(Box.createRigidArea(new Dimension(0, 10)));
+			panel.add(balanceText);
+			panel.add(Box.createRigidArea(new Dimension(0, 10)));
 			
 			JLabel walletLabel = null;
 			if (balanceLogo != null) {
@@ -335,11 +167,15 @@ public class BitPanel extends JPanel {
 			balancePanel.setBackground(Color.WHITE);
 			balancePanel.setLayout(new BoxLayout(balancePanel, BoxLayout.X_AXIS));
 			balancePanel.add(walletLabel);	
+			
+			// TODO: Ben - this is where to set the balance.  Replace the dummy
+			// text with the appropriate call to your JSON whatever.			
 			JLabel balance = new JLabel("   3.06");
+			
 			balance.setFont(new Font("Verdana", Font.PLAIN, 24));			
 			balancePanel.add(balance);
-			walletPanel.add(balancePanel);
-			this.add(walletPanel);
+			panel.add(balancePanel);
+			this.add(panel);
 		}
 	}
 		
@@ -399,7 +235,6 @@ public class BitPanel extends JPanel {
 		headerTempPanel.add(headerTextBox);
 		headerTempPanel.add(Box.createRigidArea(new Dimension(10, 0)));
 		headerPanel.add(headerTempPanel, BorderLayout.CENTER);
-//		headerPanel.add(Box.createRigidArea(new Dimension(0, 10)), BorderLayout.SOUTH);
 
 		return headerTempPanel;
 	}
@@ -440,7 +275,7 @@ public class BitPanel extends JPanel {
 		boxList.setLayout(new BoxLayout(boxList, BoxLayout.Y_AXIS));		
 		
 		for (String s: boxes) {
-
+			
 			JButton button = new JButton(s);
 			button.addMouseListener(new RolloverListener());			
 			button.setFont(new Font("Verdana", Font.BOLD, 16));
