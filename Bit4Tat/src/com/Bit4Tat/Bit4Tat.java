@@ -98,7 +98,7 @@ class BitFrame extends JFrame {
 		panelMap.put("Help", new BitPanel.HelpPanel());
 		panelMap.put("Wallet", new BitPanel.WalletPanel());
 		currentPanel = panelMap.get("Wallet");
-				
+
 		// Set up the menu bar and the menu listener.
 		
 		JMenuBar menuBar = new JMenuBar();
@@ -186,13 +186,16 @@ class BitFrame extends JFrame {
 			
 			currentButton.setContentAreaFilled(false);
 			JButton clickedButton = (JButton)event.getSource();
-			clickedButton.setBackground(Color.DARK_GRAY);
+			clickedButton.setBackground(Color.LIGHT_GRAY);
 			clickedButton.setContentAreaFilled(true);
 			currentButton = clickedButton;
 
+			contentPane = getContentPane();
 			contentPane.remove(currentPanel);
 			currentPanel = panelMap.get(event.getActionCommand());
 			contentPane.add(currentPanel);
+			contentPane.validate();
+			//System.out.println(currentPanel);
 			repaint();
 		}
 	}
