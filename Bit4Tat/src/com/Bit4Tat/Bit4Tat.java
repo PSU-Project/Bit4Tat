@@ -13,6 +13,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.HashMap;
+import java.util.Hashtable;
 
 import javax.swing.Box;
 import javax.swing.JButton;
@@ -30,20 +31,21 @@ public class Bit4Tat {
 	 * Please see the title COPYING in this distribution for license terms.
 	 * 
 	 */
-	static final String USER = "Bit4Tat";
-	static final String PASS = "mgbit4tat";
+	static final String[] mtgox_userpass = {"Bit4Tat","mgbit4tat"};
+	static final String[] th_userpass = {"thayer3@pdx.edu","Bit4Tatth"};
 	static final String version = "1.0";
+	
+	static Hashtable<String, String[]> up;
 	
 	public static void main(String[] args) 
 	{			
 		// Welcome to Bit4Tat, the coolest evar
 		SchedulerGateway simpleScheduler = new DefaultScheduler();
 		
-		Wallet coinPurse = new Wallet("Bit4Tat", "mgbit4tat");
-		coinPurse.changeService("mtgox");
-		
-		//this kind of crazy talk is on the chopping block
-		coinPurse.getPayGate().printCurrentProcessor();
+		// instantiate wallet using username data
+		up.put("mtgox", mtgox_userpass);
+		up.put("tradehill", th_userpass);
+		Wallet coinPurse = new Wallet(up);
 		
 		coinPurse = simpleScheduler.pollBalance(coinPurse);
 		

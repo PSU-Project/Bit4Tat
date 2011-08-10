@@ -13,7 +13,8 @@ public class JSONParser {
 		
 	}
 	
-	public JSONParser (String s) {
+	public JSONParser (JsonObject j) {
+		
 		
 	}
 	
