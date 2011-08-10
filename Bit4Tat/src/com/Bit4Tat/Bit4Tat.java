@@ -50,6 +50,9 @@ public class Bit4Tat {
 		
 		coinPurse = simpleScheduler.pollBalance(coinPurse);
 		
+		coinPurse.checkBalance("mtgox");
+		coinPurse.checkBalance("tradehill");
+		
 		BitFrame frame = new BitFrame();
 		frame.setTitle("Bit4Tat " + version);
 		frame.setVisible(true);
