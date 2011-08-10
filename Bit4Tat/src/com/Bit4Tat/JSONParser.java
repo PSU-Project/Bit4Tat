@@ -15,7 +15,6 @@ public class JSONParser {
 	
 	public JSONParser (JsonObject j) {
 		
-		
 	}
 	
 	public Ticker getTicker (JsonObject j) throws IOException {
