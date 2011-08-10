@@ -1,5 +1,7 @@
 package com.Bit4Tat;
 
+import java.util.Hashtable;
+
 public class Wallet {
 	
 	private static final String CHECK_BALANCE 		= "https://mtgox.com/code/getFunds.php";
@@ -9,71 +11,63 @@ public class Wallet {
 	private static final String CANCEL_ORDER 		= "https://mtgox.com/code/cancelOrder.php?name=blah&pass=blah&oid=#&type=#";
 	private static final String SEND_BTC 			= "https://mtgox.com/code/withdraw.php?name=blah&pass=blah&group1=BTC&btca=bitcoin_address_to_send_to&amount=#";
 	
-	private PaymentGateway payGate;
-	private String _user;
-	private String _pass;
+	private PaymentService mtgox;
+	private PaymentService tradehill;
+	private Hashtable<String, PaymentService> services;
 	
-	private static final String[] SERVICES = {"mtgox", "other"};
-	
-	
-		public Wallet (String user, String pass)
-		{
-			setPayGate(new PaymentGateway());
-			setUser(user);
-			setPass(pass);
-			
+	// Pass wallet all the usernames and passwords for each service 
+		public Wallet (Hashtable<String, String[]> h) {
+			// hashtable breakdown: String = service name; String[] = [user,pass]
+			services = new Hashtable<String, PaymentService>();
+			// parse hashtable parameters
+			if (h.containsKey("mtgox")) {
+				mtgox = new PaymentProcessorForMtGox(h.get("mtgox")[0], h.get("mtgox")[1]);
+				services.put("mtgox", mtgox);
+			}
+			if (h.containsKey("tradehill")) {
+				tradehill = new PaymentProcessorForTradehill(h.get("tradehill")[0], h.get("tradehill")[1]);
+				services.put("tradehill", tradehill); 
+			}
+			// add new services by checking whether the service key exists, then instantiating its payment processor
 		}
 		
-		public void buy (double amount, double price)
+		public String buy (String service, double amount, double price)
 		{
-			// Check the service and use the appropriate purchasing method
-			if (payGate.service instanceof PaymentProcessorForMtGox)
-			{
-				payGate.service.buy(this, amount, price);
-			}
-			else
-			{
-				// TODO implement payment processors for other exchanges
-			}
+			assert services.containsKey(service);
+			services.get(service).buy(amount, price);
+			// TODO figure out what this returns and return it
+			return null; 
 		}
 		
-		public void sell (double amount, double price)
+		public String sell (String service, double amount, double price)
 		{
-			payGate.useMtGox();
-			payGate.service.sell(this, price, amount);
+			assert services.containsKey(service);
+			services.get(service).sell(amount, price);
+			// TODO figure out what this returns and return it
+			return null; 
 		}
 		
-		public void changeService (String service)
+		public String checkBalance (String service) 
 		{
-			if (service == SERVICES[0])
-			{
-				payGate.useMtGox();
-			}
+			assert services.containsKey(service);
+			services.get(service).checkBalance();
+			// TODO figure out what this returns and return it
+			return null; 
 		}
-
-		public void setPayGate(PaymentGateway payGate) 
+		
+		public String getOrders (String service) 
 		{
-			this.payGate = payGate;
+			assert services.containsKey(service);
+			services.get(service).getOrders();
+			// TODO figure out what this returns and return it
+			return null;
 		}
-
-		public PaymentGateway getPayGate() 
+		
+		public String cancelOrder (String service, int orderID) 
 		{
-			return payGate;
-		}
-
-		public void setUser(String _user) {
-			this._user = _user;
-		}
-
-		public String getUser() {
-			return _user;
-		}
-
-		public void setPass(String _pass) {
-			this._pass = _pass;
-		}
-
-		public String getPass() {
-			return _pass;
+			assert services.containsKey(service);
+			services.get(service).cancelOrder(orderID);
+			// TODO figure out what this returns and return it
+			return null; 
 		}
 }

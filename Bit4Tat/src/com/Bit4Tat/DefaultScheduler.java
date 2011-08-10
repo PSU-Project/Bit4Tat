@@ -5,7 +5,6 @@ import java.util.concurrent.PriorityBlockingQueue;
 
 public class DefaultScheduler extends SchedulerGateway 
 {
-	private PaymentGateway payGate;
 	private PriorityBlockingQueue<Transaction> transactions;
 	private boolean stopped;
 	private int pollInterval;
@@ -15,10 +14,9 @@ public class DefaultScheduler extends SchedulerGateway
 	public DefaultScheduler()
 	{
 		pollInterval = 6000;
-		payGate = new PaymentGateway();
 		stopped = false;
 		
-		transactions = new PriorityBlockingQueue<Transaction>();		
+		transactions = new PriorityBlockingQueue<Transaction>();
 	}
 	
 	@Override
@@ -97,8 +95,6 @@ public class DefaultScheduler extends SchedulerGateway
 	public Wallet pollBalance(Wallet cred) 
 	{
 		// TODO Auto-generated method stub
-		
-		cred.getPayGate().service.checkBalance(cred);
 		return cred;
 		
 	}
