@@ -14,10 +14,10 @@ public class SchedulerTest {
 	public void testSchedulerConditionalBuy () {
 		
 		DefaultScheduler scheduler = new DefaultScheduler();
-		Wallet w = new Wallet("Bit4Tat", "mgbit4tat");
-		w.changeService("mtgox");	
+		//Wallet w = new Wallet("Bit4Tat", "mgbit4tat");
+		//w.changeService("mtgox");	
 		
-		scheduler.conditionalBuy(w, new Date(), 1, 0, null);
+		//scheduler.conditionalBuy(w, new Date(), 1, 0, null);
 		
 	}
 }
