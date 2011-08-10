@@ -43,6 +43,7 @@ public class Bit4Tat {
 		SchedulerGateway simpleScheduler = new DefaultScheduler();
 		
 		// instantiate wallet using username data
+		up = new Hashtable<String, String[]>();
 		up.put("mtgox", mtgox_userpass);
 		up.put("tradehill", th_userpass);
 		Wallet coinPurse = new Wallet(up);
