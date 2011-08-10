@@ -68,9 +68,11 @@ class BitFrame extends JFrame {
 	private JButton currentButton;
 	private JPanel	currentPanel;
 	private Container contentPane;
-	private HashMap<String, BitPanel> panelMap;
+	private BitPanel mainPanel;
 	
 	public BitFrame() {
+		mainPanel = new BitPanel();		
+		mainPanel.createPanels();
 		
 		// Set the frame dimensions.
 		
@@ -95,12 +97,8 @@ class BitFrame extends JFrame {
 		// Create the HashMap of valid BitPanels (one for each menu item).
 		
 		// TODO: getter/setter for BitPanel to hide implementation?
-		panelMap = new HashMap<String, BitPanel>();
-		panelMap.put("File", new BitPanel.FilePanel());
-		panelMap.put("Options", new BitPanel.OptionsPanel());
-		panelMap.put("Help", new BitPanel.HelpPanel());
-		panelMap.put("Wallet", new BitPanel.WalletPanel());
-		currentPanel = panelMap.get("Wallet");
+
+		currentPanel = mainPanel.getPanel("Wallet");
 
 		// Set up the menu bar and the menu listener.
 		
@@ -158,7 +156,6 @@ class BitFrame extends JFrame {
 		//currentPanel.setLayout()?)
 		
 		contentPane = getContentPane();
-		System.out.println(currentPanel.toString());
 		contentPane.add(currentPanel);
 		
 		// Set up a window listener to watch window events.
@@ -183,9 +180,9 @@ class BitFrame extends JFrame {
 
 		public void actionPerformed (ActionEvent event) {
 			
-			String s = event.getActionCommand();
+			//String s = event.getActionCommand();
 			
-			System.out.println(event.getActionCommand());
+			//System.out.println(event.getActionCommand());
 			
 			currentButton.setContentAreaFilled(false);
 			JButton clickedButton = (JButton)event.getSource();
@@ -195,7 +192,7 @@ class BitFrame extends JFrame {
 
 			contentPane = getContentPane();
 			contentPane.remove(currentPanel);
-			currentPanel = panelMap.get(event.getActionCommand());
+			currentPanel = mainPanel.getPanel(event.getActionCommand());
 			contentPane.add(currentPanel);
 			contentPane.validate();
 			//System.out.println(currentPanel);
