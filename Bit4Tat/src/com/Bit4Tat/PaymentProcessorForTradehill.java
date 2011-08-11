@@ -33,8 +33,12 @@ public class PaymentProcessorForTradehill extends PaymentService
 	private static final String CANCEL_ORDER 		= "https://api.tradehill.com/APIv1/USD/CancelOrder?";
 	// private static final String SEND_BTC 			= " // not implemented yet by TradeHill
 		
+	private ResponseContainer response;
+	
 	public PaymentProcessorForTradehill(String username, String password) 
 	{
+	    //TODO change to TradeHill response object
+	    response = new ResponseMtGox();
 		user = username;
 		pass = password;
 	}
@@ -66,9 +70,10 @@ public class PaymentProcessorForTradehill extends PaymentService
 		conn.disconnect();
 		
 		// TODO figure out what to return
+		
 	}
 	@Override
-	public void checkBalance() 
+	public ResponseContainer checkBalance() 
 	{
 		HttpsURLConnection conn = setupConnection(CHECK_BALANCE);
 
@@ -90,6 +95,7 @@ public class PaymentProcessorForTradehill extends PaymentService
 		}
 		conn.disconnect();	
 		// TODO figure out what to return
+		return response;
 	}
 	@Override
 	// Place an ask order for "amount" number of bitcoins, at "price" per bitcoin

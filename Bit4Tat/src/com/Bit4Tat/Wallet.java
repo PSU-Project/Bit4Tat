@@ -50,9 +50,8 @@ public class Wallet {
 		public String checkBalance (String service) 
 		{
 			assert services.containsKey(service);
-			services.get(service).checkBalance();
-			// TODO figure out what this returns and return it
-			return null; 
+			return services.get(service).checkBalance().getResponse();
+			
 		}
 		
 		public String getOrders (String service) 

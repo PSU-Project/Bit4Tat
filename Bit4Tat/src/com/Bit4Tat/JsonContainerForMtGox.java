@@ -2,8 +2,9 @@ package com.Bit4Tat;
 
 public class JsonContainerForMtGox 
 {
-	private int dollars;
-	private int bitcoins;
+	private int dollars = 99;
+	private int bitcoins = 66;
+	
 	public void setDollars(int dollars) {
 		this.dollars = dollars;
 	}
