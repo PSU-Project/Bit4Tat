@@ -33,6 +33,13 @@ public class BitPanel extends JPanel {
 	protected JButton currentButton;
 	protected SubPanel currentSubPanel;
 	
+	protected Wallet w;
+	
+	public BitPanel(Wallet w)
+	{
+		this.w = w;
+	}
+	
 	protected JPanel createHeaderPanel(String iconFilename, String headerText) {
 		
 		JPanel headerPanel = new JPanel(new BorderLayout());

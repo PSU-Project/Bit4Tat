@@ -14,8 +14,9 @@ class ExchangesPanel extends BitPanel {
 
 	private static final long serialVersionUID = 1L;	
 	
-	public ExchangesPanel() {
+	public ExchangesPanel(Wallet w) {
 		
+		super(w);
 		this.setLayout(new BorderLayout());
 		this.setBackground(Color.WHITE);
 		

@@ -10,8 +10,9 @@ public class HelpPanel extends BitPanel {
 
 	private static final long serialVersionUID = 1L;	
 	
-	public HelpPanel() {
+	public HelpPanel(Wallet w) {
 
+		super(w);
 		this.setLayout(new BorderLayout());
 		this.setBackground(Color.WHITE);
 		
