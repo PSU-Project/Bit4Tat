@@ -1,19 +1,18 @@
 package com.Bit4Tat;
 
 import java.awt.BorderLayout;
+import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Image;
 import java.awt.RenderingHints;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.Hashtable;
 
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
@@ -27,164 +26,17 @@ import javax.swing.JTextField;
 
 public class BitPanel extends JPanel {
 
-	private static final long serialVersionUID = 1L;
-	private static final Color headerColor = new Color(240, 240, 240);
-	private static final Color rolloverColor = new Color(245, 245, 255);
+	protected static final long serialVersionUID = 1L;
+	protected static final Color headerColor = new Color(240, 240, 240);
+	protected static final Color rolloverColor = new Color(245, 245, 255);
+	protected static final Color selectedColor = Color.BLUE;	
+	protected JButton currentButton;
+	protected SubPanel currentSubPanel;
 	
-	Hashtable<String, BitPanel> panelList;
-	
-	public void createPanels () {
-		panelList = new Hashtable<String, BitPanel>();
-		panelList.put("File", new FilePanel());
-		panelList.put("Options", new OptionsPanel());
-		panelList.put("Help", new HelpPanel());
-		panelList.put("Wallet", new WalletPanel());
-	}
-	
-	public BitPanel getPanel(String s) {
-		return panelList.get(s);
-	}
-
-	class FilePanel extends BitPanel {
-
-		private static final long serialVersionUID = 1L;
-
-		public FilePanel() {
-			
-			this.setLayout(new BorderLayout());
-			this.setBackground(Color.WHITE);
-			
-			this.add(createHeaderPanel("file_small.png", "File"), BorderLayout.NORTH);						
-			this.add(createSidePanel("Header", "New Wallet", "Edit Wallet", "Load Wallet", "Save Wallet"), BorderLayout.WEST);						
-
-			JPanel panel = new JPanel();
-			panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-			panel.add(Box.createRigidArea(new Dimension(10, 0)));
-			panel.add(Box.createRigidArea(new Dimension(0, 10)));			
-			panel.setBackground(Color.WHITE);
-			panel.setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0, Color.DARK_GRAY));
-			
-			this.add(panel);						
-		}		
-	}
-	
-	class OptionsPanel extends BitPanel {
-
-		private static final long serialVersionUID = 1L;
-		
-		public OptionsPanel() {
-			
-			this.setLayout(new BorderLayout());
-			this.setBackground(Color.WHITE);
-			
-			this.add(createHeaderPanel("options_small.png", "Options"), BorderLayout.NORTH);						
-			this.add(createSidePanel("Header", "Option 1", "Option 2", "Option 3", "Option 4"), BorderLayout.WEST);						
-
-			JPanel panel = new JPanel();
-			panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-			panel.add(Box.createRigidArea(new Dimension(10, 0)));
-			panel.add(Box.createRigidArea(new Dimension(0, 10)));			
-			panel.setBackground(Color.WHITE);
-			panel.setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0, Color.DARK_GRAY));
-			
-			this.add(panel);			
-		}
-	}
-
-	class HelpPanel extends BitPanel {
-
-		private static final long serialVersionUID = 1L;
-		
-		public HelpPanel() {
-			
-			this.setLayout(new BorderLayout());
-			this.setBackground(Color.WHITE);
-			
-			this.add(createHeaderPanel("help_small.png", "Help"), BorderLayout.NORTH);						
-			this.add(createSidePanel("Help Topics", "Wallet Management", "Adding Exchanges"), BorderLayout.WEST);						
-
-			JPanel panel = new JPanel();
-			panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-			panel.add(Box.createRigidArea(new Dimension(10, 0)));
-			panel.add(Box.createRigidArea(new Dimension(0, 10)));			
-			panel.setBackground(Color.WHITE);
-			panel.setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0, Color.DARK_GRAY));
-			
-			this.add(panel);
-		}		
-	}
-	
-	class WalletPanel extends BitPanel {
-
-		private static final long serialVersionUID = 1L;
-		
-		public WalletPanel() {
-		
-			this.setLayout(new BorderLayout());
-			this.setBackground(Color.WHITE);
-			
-			this.add(createHeaderPanel("logo_small.png", "Wallet"), BorderLayout.NORTH);						
-			this.add(createSidePanel("Exchanges", "Mt. Gox", "Tradehill"), BorderLayout.WEST);
-						
-			JPanel panel = new JPanel();
-			panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-			panel.add(Box.createRigidArea(new Dimension(10, 0)));
-			panel.add(Box.createRigidArea(new Dimension(0, 10)));			
-			panel.setBackground(Color.WHITE);
-			panel.setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0, Color.DARK_GRAY));
-			
-			BufferedImage balanceLogo = null;
-			
-			try {
-				File f = new File(System.getProperty("user.dir") + File.separator + "res" + File.separator + "logo_small.png");
-				System.out.println(f.getPath());
-				balanceLogo = ImageIO.read(f);
-			} catch (IOException e) {
-				System.err.println("There was a problem reading wallet_small.png from the disk.  Is it in the correct location?");
-				e.printStackTrace();
-			}			
-						
-			JLabel balanceText = new JLabel("Balance");
-			balanceText.setFont(new Font("Verdana", Font.BOLD, 32));			
-			panel.add(balanceText);
-			panel.add(Box.createRigidArea(new Dimension(0, 10)));
-			
-			JLabel walletLabel = null;
-			if (balanceLogo != null) {
-				ImageIcon icon = new ImageIcon(balanceLogo);				
-				double scale = 0.25;
-				icon.setImage(icon.getImage().getScaledInstance(
-						(int)(scale * icon.getIconHeight()),
-						(int)(scale * icon.getIconWidth()),
-						Image.SCALE_SMOOTH));
-				walletLabel = new JLabel(icon);
-			}
-			else {
-				walletLabel = new JLabel();
-			}						
-
-			JPanel balancePanel = new JPanel();
-			balancePanel.setBackground(Color.WHITE);
-			balancePanel.setLayout(new BoxLayout(balancePanel, BoxLayout.X_AXIS));
-			balancePanel.add(walletLabel);	
-			
-			// TODO: Ben - this is where to set the balance.  Replace the dummy
-			// text with the appropriate call to your JSON whatever.			
-			JLabel balance = new JLabel("   3.06");
-			
-			balance.setFont(new Font("Verdana", Font.PLAIN, 24));			
-			balancePanel.add(balance);
-			panel.add(balancePanel);
-			this.add(panel);
-		}
-	}
-		
-	private JPanel createHeaderPanel(String iconFilename, String headerText) {
+	protected JPanel createHeaderPanel(String iconFilename, String headerText) {
 		
 		JPanel headerPanel = new JPanel(new BorderLayout());
 
-		//headerPanel.add(Box.createRigidArea(new Dimension(0, 10)), BorderLayout.NORTH);
-		
 		JPanel headerTempPanel = new JPanel();
 		headerTempPanel.setLayout(new BoxLayout(headerTempPanel, BoxLayout.LINE_AXIS));
 		headerTempPanel.add(Box.createRigidArea(new Dimension(10, 0)));
@@ -224,6 +76,7 @@ public class BitPanel extends JPanel {
             }
 		};
 
+		headerTextBox.setDropTarget(null);
 		headerTextBox.setLayout(new BorderLayout());
 		headerTextBox.setText(headerText);
 		headerTextBox.setHorizontalAlignment(JTextField.RIGHT);
@@ -239,7 +92,7 @@ public class BitPanel extends JPanel {
 		return headerTempPanel;
 	}
 	
-	private JPanel createSidePanel(String header, String... boxes) {
+	protected JPanel createSidePanel(BitPanel panel, SubPanel subPanel, String header, String... buttonText) {
 		
 		JPanel sidePanel = new JPanel();
 		
@@ -274,15 +127,23 @@ public class BitPanel extends JPanel {
 		boxList.setBorder(BorderFactory.createEmptyBorder());
 		boxList.setLayout(new BoxLayout(boxList, BoxLayout.Y_AXIS));		
 		
-		for (String s: boxes) {
+		boolean setCurrent = false;
+		for (String s: buttonText) {
 			
-			JButton button = new JButton(s);
-			button.addMouseListener(new RolloverListener());			
+			JButton button = new JButton(s);			
+			button.addMouseListener(new RolloverListener(this, subPanel));			
 			button.setFont(new Font("Verdana", Font.BOLD, 16));
 			button.setContentAreaFilled(true);
 			button.setBackground(Color.WHITE);
 			button.setFocusPainted(false);
 			button.setBorderPainted(false);
+			
+			if (setCurrent == false) {
+				setCurrent = true;
+				button.setForeground(selectedColor);
+				panel.currentButton = button;				
+			}
+			
 			boxList.add(button);
 		}
 
@@ -292,7 +153,62 @@ public class BitPanel extends JPanel {
 		return sidePanel;
 	}
 	
+	class SubPanel extends JPanel {
+
+		private static final long serialVersionUID = 1L;
+
+		public SubPanel () {
+
+			this.setDoubleBuffered(true);			
+			this.setBackground(Color.WHITE);	
+		}
+		
+		public SubPanel (String header) {
+
+			this.setDoubleBuffered(true);			
+			this.setBackground(Color.WHITE);
+			this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));		
+			JLabel headerText = new JLabel (header);
+			headerText.setFont(new Font("Verdana", Font.BOLD, 16));
+			this.add(Box.createRigidArea(new Dimension(10, 0)));		
+			this.add(Box.createRigidArea(new Dimension(0, 10)));		
+			this.add(headerText);			
+		}		
+		
+		@Override
+        public void paintComponent(Graphics g) {
+            Graphics2D graphics2d = (Graphics2D) g;
+            graphics2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
+                    RenderingHints.VALUE_ANTIALIAS_ON);
+            super.paintComponent(g);
+        }				
+	}
+	
+	class HeaderLabel extends JLabel {
+		
+		private static final long serialVersionUID = 1L;
+
+		public HeaderLabel (String s) {
+			this.setText(s);
+			this.setFont(new Font("Verdana", Font.BOLD, 16));
+		}
+		
+		public HeaderLabel (String s, int fontSize) {
+			this.setText(s);
+			this.setFont(new Font("Verdana", Font.BOLD, fontSize));
+		}		
+	}
+	
 	class RolloverListener extends MouseAdapter {
+		
+		BitPanel mainPanel;
+		SubPanel subPanel;
+		
+		public RolloverListener (BitPanel panel, SubPanel subPanel) {
+			this.mainPanel = panel;
+			this.subPanel = subPanel;
+		}
+		
 		public void mouseEntered(MouseEvent e) {
 			((JButton)e.getComponent()).setBackground(rolloverColor);
 			repaint();
@@ -304,13 +220,19 @@ public class BitPanel extends JPanel {
 		}
 		
 		public void mouseClicked(MouseEvent e) {
-
+			
+			if (currentButton != null)
+				currentButton.setForeground(Color.DARK_GRAY);
+			
+			currentButton = (JButton)e.getComponent();
+			currentButton.setForeground(selectedColor);		
+			
+			CardLayout cl = (CardLayout)subPanel.getLayout();
+			cl.show(subPanel, currentButton.getText());			
+			
+			subPanel.validate();
 		}
 	}
 }
-
-
-
-
 
 
