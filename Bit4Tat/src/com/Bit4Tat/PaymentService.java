@@ -44,7 +44,7 @@ public abstract class PaymentService
 	 * @param amount
 	 * @return
 	 */
-	public abstract void checkBalance ();
+	public abstract ResponseContainer checkBalance ();
 	
 	public abstract void getOrders ();
 	

@@ -34,17 +34,20 @@ public class PaymentProcessorForMtGox extends PaymentService
 	private static final String CANCEL_ORDER 		= "https://mtgox.com/code/cancelOrder.php?";
 	private static final String SEND_BTC 			= "https://mtgox.com/code/withdraw.php?";
 	
+	private ResponseContainer response;
+	
 	public PaymentProcessorForMtGox(String username, String password)
 	{
+	    response = new ResponseMtGox();
 		user = username;
 		pass = password;
 	}
 	
 	@Override
-	public void checkBalance()
+	public ResponseContainer checkBalance()
 	{
 		HttpsURLConnection conn = setupConnection(CHECK_BALANCE);
-
+		
 		try {
 		// Construct data
 		String data = URLEncoder.encode("name", "UTF-8") + "=" + URLEncoder.encode(user, "UTF-8");
@@ -61,6 +64,7 @@ public class PaymentProcessorForMtGox extends PaymentService
 		}
 		conn.disconnect();
 		// TODO figure out what to return
+		return response;
 	}
 	
 	@Override
@@ -177,8 +181,9 @@ public class PaymentProcessorForMtGox extends PaymentService
 	        
 	        System.out.println("In the Gson parser");
 	        objs = gson.fromJson(rd, JsonContainerForMtGox.class);
-	        System.out.println(objs.getDollars());
-	        System.out.println(objs.getBitcoins());
+	        //fill the response container with the information
+	        response.setContainerInfo(objs);
+	        System.out.println("response has :" + response.getResponse());
 	    }catch(Exception ex){
 	    	System.out.println("Error filling MtGox json in getResponse().");
 	        ex.printStackTrace();
