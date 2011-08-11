@@ -46,12 +46,12 @@ public class Bit4Tat {
 		up = new Hashtable<String, String[]>();
 		up.put("mtgox", mtgox_userpass);
 		up.put("tradehill", th_userpass);
-		Wallet coinPurse = new Wallet(up);
+		//Wallet coinPurse = new Wallet(up);
 		
-		coinPurse = simpleScheduler.pollBalance(coinPurse);
+		//coinPurse = simpleScheduler.pollBalance(coinPurse);
 		
-		coinPurse.checkBalance("mtgox");
-		coinPurse.checkBalance("tradehill");
+		//coinPurse.checkBalance("mtgox");
+		//coinPurse.checkBalance("tradehill");
 		
 		BitFrame frame = new BitFrame();
 		frame.setTitle("Bit4Tat " + version);
@@ -71,11 +71,17 @@ class BitFrame extends JFrame {
 	private JButton currentButton;
 	private JPanel	currentPanel;
 	private Container contentPane;
-	private BitPanel mainPanel;
+	private Hashtable<String, BitPanel> panelList;
 	
 	public BitFrame() {
-		mainPanel = new BitPanel();		
-		mainPanel.createPanels();
+		
+		// Create the HashMap of valid BitPanels (one for each menu item).		
+		
+		panelList = new Hashtable<String, BitPanel>();
+		panelList.put("File", new FilePanel());
+		panelList.put("Options", new OptionsPanel());
+		panelList.put("Help", new HelpPanel());
+		panelList.put("Wallet", new WalletPanel());
 		
 		// Set the frame dimensions.
 		
@@ -97,11 +103,9 @@ class BitFrame extends JFrame {
 	
 		// TODO: Initialize the connection here?
 		
-		// Create the HashMap of valid BitPanels (one for each menu item).
-		
-		// TODO: getter/setter for BitPanel to hide implementation?
+		// Set the currently active panel.
 
-		currentPanel = mainPanel.getPanel("Wallet");
+		currentPanel = panelList.get("File");
 
 		// Set up the menu bar and the menu listener.
 		
@@ -139,7 +143,6 @@ class BitFrame extends JFrame {
 		
 		// Add an invisible component to space the "Wallet" item to the right.
 		
-		// TODO: fix this!
 		menuBar.add(Box.createHorizontalGlue());	
 		
 		// Add "Wallet" as a JMenuItem since it has no sub-menu.		
@@ -154,9 +157,6 @@ class BitFrame extends JFrame {
 		this.setJMenuBar(menuBar);
 		
 		// Add the current panel to the frame.
-		
-		// TODO: what layout should each use?  I should do this above actually
-		//currentPanel.setLayout()?)
 		
 		contentPane = getContentPane();
 		contentPane.add(currentPanel);
@@ -183,10 +183,6 @@ class BitFrame extends JFrame {
 
 		public void actionPerformed (ActionEvent event) {
 			
-			//String s = event.getActionCommand();
-			
-			//System.out.println(event.getActionCommand());
-			
 			currentButton.setContentAreaFilled(false);
 			JButton clickedButton = (JButton)event.getSource();
 			clickedButton.setBackground(Color.LIGHT_GRAY);
@@ -195,10 +191,10 @@ class BitFrame extends JFrame {
 
 			contentPane = getContentPane();
 			contentPane.remove(currentPanel);
-			currentPanel = mainPanel.getPanel(event.getActionCommand());
+			currentPanel = panelList.get(event.getActionCommand());
 			contentPane.add(currentPanel);
 			contentPane.validate();
-			//System.out.println(currentPanel);
+
 			repaint();
 		}
 	}
