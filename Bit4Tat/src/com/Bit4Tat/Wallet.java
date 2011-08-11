@@ -47,10 +47,11 @@ public class Wallet {
 			return null; 
 		}
 		
-		public String checkBalance (String service) 
+		public ResponseContainer checkBalance (String service) 
 		{
 			assert services.containsKey(service);
-			return services.get(service).checkBalance().getResponse();
+			 
+			return services.get(service).checkBalance();
 			
 		}
 		

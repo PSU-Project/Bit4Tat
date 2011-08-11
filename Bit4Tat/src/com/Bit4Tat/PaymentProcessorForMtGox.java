@@ -38,7 +38,6 @@ public class PaymentProcessorForMtGox extends PaymentService
 	
 	public PaymentProcessorForMtGox(String username, String password)
 	{
-	    response = new ResponseMtGox();
 		user = username;
 		pass = password;
 	}
@@ -52,13 +51,37 @@ public class PaymentProcessorForMtGox extends PaymentService
 		// Construct data
 		String data = URLEncoder.encode("name", "UTF-8") + "=" + URLEncoder.encode(user, "UTF-8");
 		data += "&" + URLEncoder.encode("pass", "UTF-8") + "=" + URLEncoder.encode(pass, "UTF-8");
-
-		/*//Diagnostics
-		System.out.println("post_string:");
-		System.out.println(data);
-		*/
-
-		getResponse(data, conn);
+		StringBuffer returnString = new StringBuffer();
+		try {
+			// open up the output stream of the connection
+			DataOutputStream wr = new DataOutputStream( conn.getOutputStream() );
+			int queryLength = data.length();
+			wr.writeBytes( data);
+			BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+		
+			System.out.println("entering MtGox Parser");
+			//Parse the string into a MtGox Container
+			try
+			{
+				response = new ResponseMtGox();
+				response.parseCheckBalance(rd);
+			}catch(Exception ex){
+				System.out.println("Error filling MtGox json in getResponse().");
+				ex.printStackTrace();
+			}
+		
+			String line;
+			while ((line = rd.readLine()) != null)
+			{
+				// Process line...
+				System.out.println(line);
+				returnString.append(line);
+			}
+			wr.close();
+			rd.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		} catch (Exception e) {
 		e.printStackTrace();
 		}
@@ -168,26 +191,6 @@ public class PaymentProcessorForMtGox extends PaymentService
 			//wr.flush();
 			// Get the response
 		BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-		
-		System.out.println("entering MtGox Parser");
-		//Parse the string into a MtGox Container
-		try
-		{
-	        Gson gson = new Gson();
-	        JsonContainerForMtGox objs = new JsonContainerForMtGox();
-	        
-	        objs.setBitcoins(99);
-	        objs.setDollars(66);
-	        
-	        System.out.println("In the Gson parser");
-	        objs = gson.fromJson(rd, JsonContainerForMtGox.class);
-	        //fill the response container with the information
-	        response.setContainerInfo(objs);
-	        System.out.println("response has :" + response.getResponse());
-	    }catch(Exception ex){
-	    	System.out.println("Error filling MtGox json in getResponse().");
-	        ex.printStackTrace();
-	    }
 		
 		String line;
 		while ((line = rd.readLine()) != null)

@@ -32,13 +32,16 @@ public class PaymentProcessorForTradehill extends PaymentService
 	private static final String GET_ORDERS		 	= "https://api.tradehill.com/APIv1/USD/GetOrders?";
 	private static final String CANCEL_ORDER 		= "https://api.tradehill.com/APIv1/USD/CancelOrder?";
 	// private static final String SEND_BTC 			= " // not implemented yet by TradeHill
-		
+	
+	public String user;
+	public String pass;
+	
 	private ResponseContainer response;
 	
 	public PaymentProcessorForTradehill(String username, String password) 
 	{
 	    //TODO change to TradeHill response object
-	    response = new ResponseMtGox();
+	    
 		user = username;
 		pass = password;
 	}
