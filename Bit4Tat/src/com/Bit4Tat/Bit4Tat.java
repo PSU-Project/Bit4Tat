@@ -46,14 +46,14 @@ public class Bit4Tat {
 		up = new Hashtable<String, String[]>();
 		up.put("mtgox", mtgox_userpass);
 		up.put("tradehill", th_userpass);
-		//Wallet coinPurse = new Wallet(up);
+		Wallet coinPurse = new Wallet(up);
 		
 		//coinPurse = simpleScheduler.pollBalance(coinPurse);
 		
 		//coinPurse.checkBalance("mtgox");
 		//coinPurse.checkBalance("tradehill");
 		
-		BitFrame frame = new BitFrame();
+		BitFrame frame = new BitFrame(coinPurse);
 		frame.setTitle("Bit4Tat " + version);
 		frame.setVisible(true);
 
@@ -74,16 +74,16 @@ class BitFrame extends JFrame {
 	private Container contentPane;
 	private Hashtable<String, BitPanel> panelList;
 	
-	public BitFrame() {
+	public BitFrame(Wallet w) {
 		
 		// Create the HashMap of valid BitPanels (one for each menu item).		
 		
 		panelList = new Hashtable<String, BitPanel>();
-		panelList.put("File", new FilePanel());
-		panelList.put("Options", new OptionsPanel());
-		panelList.put("Exchanges", new ExchangesPanel());		
-		panelList.put("Help", new HelpPanel());
-		panelList.put("Wallet", new WalletPanel());
+		panelList.put("File", new FilePanel(w));
+		panelList.put("Options", new OptionsPanel(w));
+		panelList.put("Exchanges", new ExchangesPanel(w));		
+		panelList.put("Help", new HelpPanel(w));
+		panelList.put("Wallet", new WalletPanel(w));
 		
 		// Set the frame dimensions.
 		

@@ -22,8 +22,8 @@ public class WalletPanel extends BitPanel {
 
 	private static final long serialVersionUID = 1L;
 	
-	public WalletPanel() {
-	
+	public WalletPanel(Wallet w) {
+		super(w);
 		this.setLayout(new BorderLayout());
 		this.setBackground(Color.WHITE);
 		
@@ -75,8 +75,9 @@ public class WalletPanel extends BitPanel {
 		balancePanel.add(walletLabel);	
 		
 		// TODO: Ben - this is where to set the balance.  Replace the dummy
-		// text with the appropriate call to your JSON whatever.			
-		JLabel balance = new JLabel("   3.06");
+		// text with the appropriate call to your JSON whatever.
+		
+		JLabel balance = new JLabel(w.checkBalance("mtgox").getResponse());
 		
 		balance.setFont(new Font("Verdana", Font.PLAIN, 24));			
 		balancePanel.add(balance);

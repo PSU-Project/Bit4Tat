@@ -11,8 +11,9 @@ public class FilePanel extends BitPanel {
 
 	private static final long serialVersionUID = 1L;
 	
-	public FilePanel() {
+	public FilePanel(Wallet w) {
 		
+		super(w);
 		this.setLayout(new BorderLayout());
 		this.setBackground(Color.WHITE);
 		
