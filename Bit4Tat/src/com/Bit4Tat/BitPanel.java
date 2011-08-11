@@ -184,6 +184,21 @@ public class BitPanel extends JPanel {
         }				
 	}
 	
+	class HeaderLabel extends JLabel {
+		
+		private static final long serialVersionUID = 1L;
+
+		public HeaderLabel (String s) {
+			this.setText(s);
+			this.setFont(new Font("Verdana", Font.BOLD, 16));
+		}
+		
+		public HeaderLabel (String s, int fontSize) {
+			this.setText(s);
+			this.setFont(new Font("Verdana", Font.BOLD, fontSize));
+		}		
+	}
+	
 	class RolloverListener extends MouseAdapter {
 		
 		BitPanel mainPanel;

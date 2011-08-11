@@ -66,6 +66,7 @@ class BitFrame extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JButton fileMenu;
 	private JButton optionMenu;
+	private JButton exchangesMenu;
 	private JButton helpMenu;
 	private JButton walletMenu;
 	private JButton currentButton;
@@ -80,6 +81,7 @@ class BitFrame extends JFrame {
 		panelList = new Hashtable<String, BitPanel>();
 		panelList.put("File", new FilePanel());
 		panelList.put("Options", new OptionsPanel());
+		panelList.put("Exchanges", new ExchangesPanel());		
 		panelList.put("Help", new HelpPanel());
 		panelList.put("Wallet", new WalletPanel());
 		
@@ -113,7 +115,7 @@ class BitFrame extends JFrame {
 		setJMenuBar(menuBar);
 		MenuListener menuListener = new MenuListener();
 		
-		// Add the file JMenu to the menu bar.
+		// Add "File" as a JMenuItem since it has no sub-menu.
 		
 		fileMenu = new JButton("File");
 		fileMenu.setContentAreaFilled(false);
@@ -132,6 +134,15 @@ class BitFrame extends JFrame {
 		menuBar.add(optionMenu);		
 		optionMenu.addActionListener(menuListener);
 
+		// Add "Exchanges" as a JMenuItem since it has no sub-menu.
+		
+		exchangesMenu = new JButton("Exchanges");
+		exchangesMenu.setContentAreaFilled(false);
+		exchangesMenu.setBorderPainted(false);
+		exchangesMenu.setFocusPainted(false);
+		menuBar.add(exchangesMenu);		
+		exchangesMenu.addActionListener(menuListener);		
+		
 		// Add "Help" as a JMenuItem since it has no sub-menu.		
 				
 		helpMenu = new JButton("Help");

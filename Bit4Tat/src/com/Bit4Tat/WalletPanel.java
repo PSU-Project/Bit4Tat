@@ -44,7 +44,6 @@ public class WalletPanel extends BitPanel {
 		
 		try {
 			File f = new File(System.getProperty("user.dir") + File.separator + "res" + File.separator + "logo_small.png");
-			System.out.println(f.getPath());
 			balanceLogo = ImageIO.read(f);
 		} catch (IOException e) {
 			System.err.println("There was a problem reading wallet_small.png from the disk.  Is it in the correct location?");
