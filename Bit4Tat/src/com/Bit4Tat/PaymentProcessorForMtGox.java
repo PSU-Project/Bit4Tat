@@ -33,6 +33,7 @@ public class PaymentProcessorForMtGox extends PaymentService
 	private static final String GET_ORDERS		 	= "https://mtgox.com/code/getOrders.php?";
 	private static final String CANCEL_ORDER 		= "https://mtgox.com/code/cancelOrder.php?";
 	private static final String SEND_BTC 			= "https://mtgox.com/code/withdraw.php?";
+	private static final String CHECK_TICKER		= "http://mtgox.com/api/0/data/ticker.php";
 	
 	private ResponseContainer response;
 	
@@ -45,21 +46,18 @@ public class PaymentProcessorForMtGox extends PaymentService
 	@Override
 	public ResponseContainer checkBalance()
 	{
-		HttpsURLConnection conn = setupConnection(CHECK_BALANCE);
+		HttpsURLConnection conn = setupConnection(CHECK_TICKER);
+		StringBuffer returnString = new StringBuffer();
 		
 		try {
-		// Construct data
-		String data = URLEncoder.encode("name", "UTF-8") + "=" + URLEncoder.encode(user, "UTF-8");
-		data += "&" + URLEncoder.encode("pass", "UTF-8") + "=" + URLEncoder.encode(pass, "UTF-8");
-		StringBuffer returnString = new StringBuffer();
-		try {
 			// open up the output stream of the connection
-			DataOutputStream wr = new DataOutputStream( conn.getOutputStream() );
-			int queryLength = data.length();
-			wr.writeBytes( data);
+			//DataOutputStream wr = new DataOutputStream( conn.getOutputStream() );
+			//int queryLength = data.length();
+			//wr.writeBytes( data);
 			BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 		
 			System.out.println("entering MtGox Parser");
+			
 			//Parse the string into a MtGox Container
 			try
 			{
@@ -69,7 +67,54 @@ public class PaymentProcessorForMtGox extends PaymentService
 				System.out.println("Error filling MtGox json in getResponse().");
 				ex.printStackTrace();
 			}
+			
+			String line;
+			while ((line = rd.readLine()) != null)
+			{
+				// Process line...
+				System.out.println(line);
+				returnString.append(line);
+			}
+			//wr.close();
+			rd.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		conn.disconnect();
+		// TODO figure out what to return
+		return response;
+	}
+	
+	@Override
+	public ResponseContainer checkTicker() 
+	{
+		HttpsURLConnection conn = setupConnection(CHECK_BALANCE);
 		
+		try {
+		// Construct data
+		String data = URLEncoder.encode("name", "UTF-8") + "=" + URLEncoder.encode(user, "UTF-8");
+		data += "&" + URLEncoder.encode("pass", "UTF-8") + "=" + URLEncoder.encode(pass, "UTF-8");
+		StringBuffer returnString = new StringBuffer();
+		try {
+			// open up the output stream of the connection
+			data = "http://mtgox.com/api/0/data/ticker.php";
+			DataOutputStream wr = new DataOutputStream( conn.getOutputStream() );
+			int queryLength = data.length();
+			wr.writeBytes( data);
+			BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+		
+			System.out.println("entering MtGox Ticker Parser");
+			/*
+			//Parse the string into a MtGox Container
+			try
+			{
+				response = new ResponseMtGox();
+				response.parseTicker(rd);
+			}catch(Exception ex){
+				System.out.println("Error filling MtGox json in getResponse().");
+				ex.printStackTrace();
+			}
+			*/
 			String line;
 			while ((line = rd.readLine()) != null)
 			{

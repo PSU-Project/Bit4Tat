@@ -70,4 +70,10 @@ public class Wallet {
 			// TODO figure out what this returns and return it
 			return null; 
 		}
+		
+		public ResponseContainer checkTicker (String service)
+		{
+			assert services.containsKey(service);
+			return services.get(service).checkTicker();
+		}
 }

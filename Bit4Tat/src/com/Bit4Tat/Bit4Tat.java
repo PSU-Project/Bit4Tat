@@ -31,7 +31,8 @@ public class Bit4Tat {
 	 * Please see the title COPYING in this distribution for license terms.
 	 * 
 	 */
-	static final String[] mtgox_userpass = {"Bit4Tat","mgbit4tat"};
+	//static final String[] mtgox_userpass = {"Bit4Tat","mgbit4tat"};
+	static final String[] mtgox_userpass = {"garbados","compsciisthebest!"};
 	static final String[] th_userpass = {"thayer3@pdx.edu","Bit4Tatth"};
 	static final String version = "1.0";
 	

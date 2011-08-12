@@ -77,7 +77,8 @@ public class WalletPanel extends BitPanel {
 		// TODO: Ben - this is where to set the balance.  Replace the dummy
 		// text with the appropriate call to your JSON whatever.
 		
-		JLabel balance = new JLabel(w.checkBalance("mtgox").getResponse());
+		
+		JLabel balance = new JLabel(w.checkBalance("mtgox").getBitCoins());
 		
 		balance.setFont(new Font("Verdana", Font.PLAIN, 24));			
 		balancePanel.add(balance);

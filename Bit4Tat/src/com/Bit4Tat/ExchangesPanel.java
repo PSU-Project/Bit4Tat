@@ -36,30 +36,32 @@ class ExchangesPanel extends BitPanel {
 		
 		// Add the ticker components here:
 		// {"ticker":{"high":10.4959,"low":8.45099,"avg":9.595957131,"vwap":9.485441665,"vol":56999,"last":9.3502,"buy":9.3502,"sell":9.35761}}
+		ResponseContainer info = w.checkTicker("mtgox");
+	
 		
 		mtGoxPanel.add(new HeaderLabel("High"));
 		mtGoxPanel.add(new JLabel(" "));
-		mtGoxPanel.add(new JLabel("10.4959"));
+		mtGoxPanel.add(new JLabel(info.getHigh() + ""));
 		mtGoxPanel.add(new JLabel(" "));		
 		mtGoxPanel.add(new HeaderLabel("Average"));
 		mtGoxPanel.add(new JLabel(" "));		
-		mtGoxPanel.add(new JLabel("9.595957131"));
+		mtGoxPanel.add(new JLabel(info.getAvg() + ""));
 		mtGoxPanel.add(new JLabel(" "));
 		mtGoxPanel.add(new HeaderLabel("Volume"));
 		mtGoxPanel.add(new JLabel(" "));		
-		mtGoxPanel.add(new JLabel("56999"));
+		mtGoxPanel.add(new JLabel(info.getVol() + ""));
 		mtGoxPanel.add(new JLabel(" "));
 		mtGoxPanel.add(new HeaderLabel("Last"));
 		mtGoxPanel.add(new JLabel(" "));		
-		mtGoxPanel.add(new JLabel("9.3502"));
+		mtGoxPanel.add(new JLabel(info.getLast() + ""));
 		mtGoxPanel.add(new JLabel(" "));
 		mtGoxPanel.add(new HeaderLabel("Buy"));
 		mtGoxPanel.add(new JLabel(" "));		
-		mtGoxPanel.add(new JLabel("9.3502"));
+		mtGoxPanel.add(new JLabel(info.getBuy() + ""));
 		mtGoxPanel.add(new JLabel(" "));
 		mtGoxPanel.add(new HeaderLabel("Sell"));
 		mtGoxPanel.add(new JLabel(" "));		
-		mtGoxPanel.add(new JLabel("9.35761"));
+		mtGoxPanel.add(new JLabel(info.getSell() + ""));
 
 		subPanel.add("Mt. Gox", mtGoxPanel);
 
