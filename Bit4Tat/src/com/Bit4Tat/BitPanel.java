@@ -193,8 +193,7 @@ public class BitPanel extends JPanel {
 			this.setDoubleBuffered(true);			
 			this.setBackground(Color.WHITE);
 			this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));		
-			JLabel headerText = new JLabel (header);
-			headerText.setFont(new Font("Verdana", Font.BOLD, 16));
+			HeaderLabel headerText = new HeaderLabel (header);
 			this.add(Box.createRigidArea(new Dimension(10, 0)));		
 			this.add(Box.createRigidArea(new Dimension(0, 10)));		
 			this.add(headerText);			
@@ -215,7 +214,7 @@ public class BitPanel extends JPanel {
 
 		public HeaderLabel (String s) {
 			this.setText(s);
-			this.setFont(new Font("Verdana", Font.BOLD, 16));
+			this.setFont(new Font("Verdana", Font.BOLD, 32));
 		}
 		
 		public HeaderLabel (String s, int fontSize) {

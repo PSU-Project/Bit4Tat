@@ -69,7 +69,7 @@ public class WalletPanel extends BitPanel {
 		}			
 					
 		JLabel balanceText = new JLabel("Balance");
-		balanceText.setFont(new Font("Verdana", Font.BOLD, 32));			
+		balanceText.setFont(new Font("Verdana", Font.BOLD, 24));			
 		mtGoxPanel.add(balanceText);
 		mtGoxPanel.add(Box.createRigidArea(new Dimension(0, 10)));
 		
@@ -97,6 +97,7 @@ public class WalletPanel extends BitPanel {
 		
 		
 		JLabel balance = new JLabel(w.checkBalance("mtgox").getBitCoins());
+		//JLabel balance = new JLabel("1 million dollars!");
 		
 		balance.setFont(new Font("Verdana", Font.PLAIN, 24));			
 		balancePanel.add(balance);

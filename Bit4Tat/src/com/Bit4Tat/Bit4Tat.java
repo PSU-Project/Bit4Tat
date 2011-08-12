@@ -45,7 +45,7 @@ public class Bit4Tat {
 	 * 
 	 */
 	//static final String[] mtgox_userpass = {"Bit4Tat","mgbit4tat"};
-	static final String[] mtgox_userpass = {"garbados","compsciisthebest!"};
+	static final String[] mtgox_userpass = {"garbados","compsciisthebest"};
 	static final String[] th_userpass = {"thayer3@pdx.edu","Bit4Tatth"};
 	static final String version = "1.0";
 	
@@ -60,6 +60,7 @@ public class Bit4Tat {
 		WalletFileIO f = new WalletFileIO("wallet.csv");
 		f.openReader();
 		StringTokenizer tokenizer = f.getTokenizer(",");
+		
 		// userpass file repeats "service, user, pass", so for every 3 items therein, there's a complete service.
 		userpass = new Hashtable<String, String[]>();
 		String service = "";
@@ -86,7 +87,6 @@ public class Bit4Tat {
 				System.err.println(e);
 			}
 		}
-	
 		Wallet coinPurse = new Wallet(userpass);
 		
 		//coinPurse = simpleScheduler.pollBalance(coinPurse);
