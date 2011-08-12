@@ -1,0 +1,32 @@
+                    *************
+                    * BIT 4 TAT *
+                    *************
+
+v1.0
+(c) 2011 
+Josh Dorothy   - jdorothy@cs.pdx.edu
+Ben Harrington - benny.osu@gmail.com
+Max Thayer     - garbados@gmail.com
+
+
+What it is:
+------------
+A cross-platform Java application allowing for automated Bitcoin trading.
+Currently supported features are buying, selling, ticker information, and
+balance checking.
+
+
+Where to get it:
+----------------
+As of this writing, the current source tree is available from github at
+github.com/PSU-Project/Bit4Tat.
+
+
+A word of thanks:
+-----------------
+- To Google for their JSON library.
+- To the following users on openclipart.org for their artwork:
+     - warszawianka
+     - johnpwarren
+- To user crobbo on bitcointalk.org for his Bitcoin logo:
+  http://www.crobbo.com/bitcoin/128x128/icon_coin3.png

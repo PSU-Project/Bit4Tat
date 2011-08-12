@@ -1,0 +1,37 @@
+COPYRIGHT INFORMATION
+----------------------
+
+The following licenses were used for files in this project:
+
+GPL 3.0 - http://www.gnu.org/licenses/gpl.html
+Creative Commons - http://creativecommons.org/publicdomain/zero/1.0/legalcode
+Apache - http://www.apache.org/licenses/LICENSE-2.0
+
+/src
+-----
+  All files in this directory are licensed by the developers under the GPL 3.0
+  license.
+
+/lib
+-----
+The following files are licensed under the Apache license:
+
+  gson-1.7.1-javadoc.jar
+  gson-1.7.1-sources.jar
+  gson-1.7.1.jar
+
+/res
+-----
+The following files are licensed under the Creative Commons license:
+
+  file_small.png
+  options_small.png
+  exchanges_small.png
+  help_small.png
+
+The following file was cropped from a larger file posted for use in the public
+domain on bitcointalk.org:
+
+  logo_small.png
+
+
