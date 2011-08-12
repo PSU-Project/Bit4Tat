@@ -69,7 +69,7 @@ class ExchangesPanel extends BitPanel {
 		 * TRADEHILL TICKER PANEL
 		 */		
 		
-		SubPanel tradehillPanel = new SubPanel ("Tradehill");
+		SubPanel tradehillPanel = new SubPanel ("Tradehill");					
 		subPanel.add("Tradehill", tradehillPanel);
 		
 		JPanel sidePanel = createSidePanel(this, subPanel, "Exchanges", "Mt. Gox", "Tradehill");

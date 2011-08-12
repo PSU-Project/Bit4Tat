@@ -1,0 +1,13 @@
+INSTALLING
+----------
+
+Bit4Tat requires at least Java SE 5 or higher.  It also requires that the
+appropriate environment variables are set to allow use of java and javac
+without exact paths.
+
+If both of these conditions are true, simply type 'make' (without quotes) from
+the top level of the source tree.  A directory called /bin will be created
+containing the class files.
+
+To run, just run the bit4tat shell script.  This will use java to launch
+the application.
