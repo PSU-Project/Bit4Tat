@@ -47,6 +47,7 @@ public class ResponseMtGox extends ResponseContainer
 	
 	public class CheckTicker
 	{
+		// Example ticker json response string
 		// {"ticker":{"high":10.4959,"low":8.45099,"avg":9.595957131,"vwap":9.485441665,"vol":56999,"last":9.3502,"buy":9.3502,"sell":9.35761}}
 		
 		@SerializedName("ticker")
@@ -107,60 +108,62 @@ public class ResponseMtGox extends ResponseContainer
 	}
 
 	@Override
-	public Double getAvg() {
+	public Double getAvg() 
+	{
 		return ticker.list.get(0).value;
 	}
 
 	@Override
-	public String getBitCoins() {
-		// TODO Auto-generated method stub
+	public String getBitCoins() 
+	{
 		return balance.btcs;
 	}
 
 	@Override
-	public Double getBuy() {
-		// TODO Auto-generated method stub
+	public Double getBuy() 
+	{
 		return ticker.list.get(0).value;
 	}
 
 	@Override
-	public Double getHigh() {
-		// TODO Auto-generated method stub
+	public Double getHigh() 
+	{
 		return ticker.list.get(0).value;
 	}
 
 	@Override
-	public Double getLast() {
-		// TODO Auto-generated method stub
+	public Double getLast() 
+	{
 		return ticker.list.get(0).value;
 	}
 
 	@Override
-	public Double getLow() {
-		// TODO Auto-generated method stub
+	public Double getLow() 
+	{
 		return ticker.list.get(0).value;
 	}
 
 	@Override
-	public Double getSell() {
-		// TODO Auto-generated method stub
+	public Double getSell() 
+	{
 		return ticker.list.get(0).value;
 	}
 
 	@Override
-	public String getUSDS() {
-		// TODO Auto-generated method stub
+	public String getUSDS() 
+	{
 		return balance.usds;
 	}
 
 	@Override
-	public Double getVol() {
-		// TODO Auto-generated method stub
+	public Double getVol() 
+	{
 		return ticker.list.get(0).value;
 	}
 
 	@Override
-	public Double getVwap() {
+	public Double getVwap() 
+	{
 		// TODO Auto-generated method stub
 		return ticker.list.get(0).value;
 	}

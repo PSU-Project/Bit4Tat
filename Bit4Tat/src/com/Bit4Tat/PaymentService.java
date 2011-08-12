@@ -45,29 +45,39 @@ public abstract class PaymentService
 	protected static String pass;
 	protected static String service;
 	/**
-	 * Description here
-	 * @param account - same line.
-	 * @param amount
-	 * @return
+	 * Buys the amount of currency for the price given
+	 * @param amount - 
+	 * @param price - 
+	 * @return void
 	 */
 	public abstract void buy (double amount, double price);
 	/**
-	 * 
-	 * @param 
+	 * Sells the amount of currency for the price given
+	 * @param amount -
+	 * @param price -
 	 * @return
 	 */
 	public abstract void sell (double amount, double price);
 	/**
-	 * 
-	 * @param response
-	 * @param amount
-	 * @return
+	 * Buys the amount of currency for the price given
+	 * @return Response container child matching the service used.
 	 */
 	public abstract ResponseContainer checkBalance ();
+	/**
+	 * Buys the amount of currency for the price given
+	 * @return Response container child matching the service used.
+	 */
 	public abstract ResponseContainer checkTicker ();
-	
+	/**
+	 * Gets the Orders completed
+	 * @return void
+	 * 	 */
 	public abstract void getOrders ();
-	
+	/**
+	 * Cancel Order
+	 * @param OrderID number
+	 * @return void
+	 */
 	public abstract void cancelOrder (int orderID);
 	
 	public String getService() 

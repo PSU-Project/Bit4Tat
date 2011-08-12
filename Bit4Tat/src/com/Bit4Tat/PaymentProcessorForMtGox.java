@@ -94,6 +94,7 @@ public class PaymentProcessorForMtGox extends PaymentService
 				ex.printStackTrace();
 			}
 			
+			//If the json is not parsed, this will print json string to the console.
 			String line;
 			while ((line = rd.readLine()) != null)
 			{
@@ -110,7 +111,7 @@ public class PaymentProcessorForMtGox extends PaymentService
 		e.printStackTrace();
 		}
 		conn.disconnect();
-		// TODO figure out what to return
+		//return a MtGox Response (child of abstract ResponseContainer)
 		return response;
 	}
 	
@@ -138,7 +139,7 @@ public class PaymentProcessorForMtGox extends PaymentService
 			}
 			*/
 			
-			
+			//If the json is not parsed, this will print json string to the console.
 			String line;
 			while ((line = rd.readLine()) != null)
 			{
@@ -153,7 +154,7 @@ public class PaymentProcessorForMtGox extends PaymentService
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+		//return a MtGox Response (child of abstract ResponseContainer)
 		return response;
 	}
 	
@@ -180,7 +181,7 @@ public class PaymentProcessorForMtGox extends PaymentService
 		}
 		// disconnect
 		conn.disconnect();
-		// TODO figure out what to return
+		// needs to be parsed into a proper response class
 	}
 	
 	@Override
@@ -271,10 +272,11 @@ public class PaymentProcessorForMtGox extends PaymentService
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		// needs to be parsed into a proper response class
 		return returnString.toString();
 	}
 	
-	// Something or other. Ben, Josh: What does this do? --Max
+	// Structure needed for authenticating the connection with MtGox of httpS
 	static class DefaultTrustManager implements X509TrustManager
 	{
 		@Override
@@ -287,7 +289,7 @@ public class PaymentProcessorForMtGox extends PaymentService
 		public X509Certificate[] getAcceptedIssuers() {return null;}
 	}
 	
-	// Sets up a connection to a URL
+	// Sets up a connection to a URL, this is common code for all MtGox API calls.
 	HttpsURLConnection setupConnection(String urlString)
 	{
 		SSLContext ctx = null;
@@ -331,18 +333,6 @@ public class PaymentProcessorForMtGox extends PaymentService
 				return true;
 			}
 		});
-
-	/*
-	try {
-
-	System.out.println(conn.getResponseCode());
-	} catch (IOException e) {
-
-	// TODO Auto-generated catch block
-	e.printStackTrace();
-
-	}
-	*/
 		return conn;
 	}
 }
