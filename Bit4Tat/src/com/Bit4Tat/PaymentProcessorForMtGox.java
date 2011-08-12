@@ -81,7 +81,7 @@ public class PaymentProcessorForMtGox extends PaymentService
 			wr.writeBytes( data);
 			BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 		
-			System.out.println("entering MtGox CheckBalance Parser");
+			//System.out.println("entering MtGox CheckBalance Parser");
 			
 			
 			//Parse the string into a MtGox Container
@@ -125,7 +125,7 @@ public class PaymentProcessorForMtGox extends PaymentService
 			
 			BufferedReader rd = new BufferedReader(new InputStreamReader(url.openStream()));
 		
-			System.out.println("before MtGox Ticker Parser");	
+			//System.out.println("before MtGox Ticker Parser");	
 			//Parse the string into a MtGox Container
 			/*
 			try

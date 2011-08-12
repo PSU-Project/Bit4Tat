@@ -62,7 +62,6 @@ public class WalletFileIO {
 	 */
 	
 	public void openReader () {
-		System.out.println(System.getProperty("user.dir"));
 		try {
 			if (filename != null) {
 				in = new BufferedReader(new FileReader(filename));

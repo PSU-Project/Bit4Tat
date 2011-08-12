@@ -90,7 +90,7 @@ public class ResponseMtGox extends ResponseContainer
 	{
         Gson gson = new Gson();
 		CheckBalance parseObj = new CheckBalance();
-		System.out.println("In the CheckBalance Gson parser");
+		//System.out.println("In the CheckBalance Gson parser");
         parseObj = gson.fromJson(rd, CheckBalance.class);
         balance = parseObj;
 	}
@@ -100,7 +100,7 @@ public class ResponseMtGox extends ResponseContainer
 	{
 		Gson gson = new Gson();
 		CheckTicker parseObj = new CheckTicker();
-		System.out.println("In the Ticker Gson parser");
+		//System.out.println("In the Ticker Gson parser");
         parseObj = gson.fromJson(rd, CheckTicker.class);
         ticker = parseObj;
         //System.out.println(ticker.list.get(1));
