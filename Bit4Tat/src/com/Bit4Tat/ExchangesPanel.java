@@ -36,7 +36,7 @@ class ExchangesPanel extends BitPanel {
 		
 		// Add the ticker components here:
 		// {"ticker":{"high":10.4959,"low":8.45099,"avg":9.595957131,"vwap":9.485441665,"vol":56999,"last":9.3502,"buy":9.3502,"sell":9.35761}}
-		ResponseContainer info = w.checkTicker("mtgox");
+		//ResponseContainer info = w.checkTicker("mtgox");
 	
 		
 		mtGoxPanel.add(new HeaderLabel("High"));

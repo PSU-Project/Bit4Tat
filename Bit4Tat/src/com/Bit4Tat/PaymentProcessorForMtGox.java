@@ -69,7 +69,7 @@ public class PaymentProcessorForMtGox extends PaymentService
 			try
 			{
 				response = new ResponseMtGox();
-				response.parseTicker(rd);
+				response.parseCheckBalance(rd);
 			}catch(Exception ex){
 				System.out.println("Error filling MtGox json in getResponse().");
 				ex.printStackTrace();

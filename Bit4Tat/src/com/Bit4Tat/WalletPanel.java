@@ -78,8 +78,8 @@ public class WalletPanel extends BitPanel {
 		// text with the appropriate call to your JSON whatever.
 		
 		
-		//JLabel balance = new JLabel(w.checkBalance("mtgox").getBitCoins());
-		JLabel balance = new JLabel("1 million dollars!");
+		JLabel balance = new JLabel(w.checkBalance("mtgox").getBitCoins());
+		//JLabel balance = new JLabel("1 million dollars!");
 		
 		balance.setFont(new Font("Verdana", Font.PLAIN, 24));			
 		balancePanel.add(balance);

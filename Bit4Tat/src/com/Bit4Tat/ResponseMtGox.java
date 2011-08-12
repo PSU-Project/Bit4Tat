@@ -84,7 +84,7 @@ public class ResponseMtGox extends ResponseContainer
 		System.out.println("In the Ticker Gson parser");
         parseObj = gson.fromJson(rd, CheckTicker.class);
         ticker = parseObj;
-        System.out.println(ticker.list.get(1));
+        //System.out.println(ticker.list.get(1));
 	}
 
 	@Override
