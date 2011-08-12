@@ -47,22 +47,23 @@ public class PaymentProcessorForMtGox extends PaymentService
 	@Override
 	public ResponseContainer checkBalance()
 	{
-HttpsURLConnection conn = setupConnection(CHECK_BALANCE);
+		HttpsURLConnection conn = setupConnection(CHECK_BALANCE);
 		
 		try {
 		// Construct data
 		String data = URLEncoder.encode("name", "UTF-8") + "=" + URLEncoder.encode(user, "UTF-8");
-		data += "&" + URLEncoder.encode("pass", "UTF-8") + "=" + URLEncoder.encode(pass, "UTF-8");
+		data += "&" + URLEncoder.encode("pass", "UTF-8") + "=" + URLEncoder.encode(pass.trim(), "UTF-8");
 		StringBuffer returnString = new StringBuffer();
+
 		try {
 			// open up the output stream of the connection
-			data = "http://mtgox.com/api/0/data/ticker.php";
 			DataOutputStream wr = new DataOutputStream( conn.getOutputStream() );
 			int queryLength = data.length();
 			wr.writeBytes( data);
 			BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 		
-			System.out.println("entering MtGox Ticker Parser");
+			System.out.println("entering MtGox CheckBalance Parser");
+			
 			
 			//Parse the string into a MtGox Container
 			try
@@ -102,13 +103,12 @@ HttpsURLConnection conn = setupConnection(CHECK_BALANCE);
 		try {
 			
 			URL url = new URL(CHECK_TICKER);
-			//InputStream in = url.openStream();
+			
 			BufferedReader rd = new BufferedReader(new InputStreamReader(url.openStream()));
 		
-		
-			System.out.println("entering MtGox Ticker Parser");
-			/*
+			System.out.println("before MtGox Ticker Parser");	
 			//Parse the string into a MtGox Container
+			/*
 			try
 			{
 				response = new ResponseMtGox();
@@ -118,6 +118,7 @@ HttpsURLConnection conn = setupConnection(CHECK_BALANCE);
 				ex.printStackTrace();
 			}
 			*/
+			
 			
 			String line;
 			while ((line = rd.readLine()) != null)

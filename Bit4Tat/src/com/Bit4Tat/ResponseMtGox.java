@@ -1,6 +1,7 @@
 package com.Bit4Tat;
 
 import java.io.BufferedReader;
+import java.util.List;
 
 import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
@@ -19,9 +20,20 @@ public class ResponseMtGox extends ResponseContainer
 		public String btcs;
 	}
 	
+	public class TickerList
+	{
+		String name;
+		Double value;
+	}
+	
 	public class CheckTicker
 	{
 		// {"ticker":{"high":10.4959,"low":8.45099,"avg":9.595957131,"vwap":9.485441665,"vol":56999,"last":9.3502,"buy":9.3502,"sell":9.35761}}
+		
+		@SerializedName("ticker")
+		public List<TickerList> list;
+		
+		/*
 		@SerializedName("high")
 		public Double high;
 		
@@ -45,6 +57,7 @@ public class ResponseMtGox extends ResponseContainer
 		
 		@SerializedName("sell")
 		public Double sell;
+		*/
 	}
 	
 	public ResponseMtGox()
@@ -71,12 +84,12 @@ public class ResponseMtGox extends ResponseContainer
 		System.out.println("In the Ticker Gson parser");
         parseObj = gson.fromJson(rd, CheckTicker.class);
         ticker = parseObj;
-        System.out.println(ticker.avg);
+        System.out.println(ticker.list.get(1));
 	}
 
 	@Override
 	public Double getAvg() {
-		return ticker.avg;
+		return ticker.list.get(0).value;
 	}
 
 	@Override
@@ -88,31 +101,31 @@ public class ResponseMtGox extends ResponseContainer
 	@Override
 	public Double getBuy() {
 		// TODO Auto-generated method stub
-		return ticker.buy;
+		return ticker.list.get(0).value;
 	}
 
 	@Override
 	public Double getHigh() {
 		// TODO Auto-generated method stub
-		return ticker.high;
+		return ticker.list.get(0).value;
 	}
 
 	@Override
 	public Double getLast() {
 		// TODO Auto-generated method stub
-		return ticker.last;
+		return ticker.list.get(0).value;
 	}
 
 	@Override
 	public Double getLow() {
 		// TODO Auto-generated method stub
-		return ticker.low;
+		return ticker.list.get(0).value;
 	}
 
 	@Override
 	public Double getSell() {
 		// TODO Auto-generated method stub
-		return ticker.sell;
+		return ticker.list.get(0).value;
 	}
 
 	@Override
@@ -124,13 +137,13 @@ public class ResponseMtGox extends ResponseContainer
 	@Override
 	public Double getVol() {
 		// TODO Auto-generated method stub
-		return ticker.vol;
+		return ticker.list.get(0).value;
 	}
 
 	@Override
 	public Double getVwap() {
 		// TODO Auto-generated method stub
-		return ticker.vwap;
+		return ticker.list.get(0).value;
 	}
 
 }

@@ -41,27 +41,27 @@ class ExchangesPanel extends BitPanel {
 		
 		mtGoxPanel.add(new HeaderLabel("High"));
 		mtGoxPanel.add(new JLabel(" "));
-		mtGoxPanel.add(new JLabel(info.getHigh() + ""));
+		mtGoxPanel.add(new JLabel(""));
 		mtGoxPanel.add(new JLabel(" "));		
 		mtGoxPanel.add(new HeaderLabel("Average"));
 		mtGoxPanel.add(new JLabel(" "));		
-		mtGoxPanel.add(new JLabel(info.getAvg() + ""));
+		mtGoxPanel.add(new JLabel(""));
 		mtGoxPanel.add(new JLabel(" "));
 		mtGoxPanel.add(new HeaderLabel("Volume"));
 		mtGoxPanel.add(new JLabel(" "));		
-		mtGoxPanel.add(new JLabel(info.getVol() + ""));
+		mtGoxPanel.add(new JLabel(""));
 		mtGoxPanel.add(new JLabel(" "));
 		mtGoxPanel.add(new HeaderLabel("Last"));
 		mtGoxPanel.add(new JLabel(" "));		
-		mtGoxPanel.add(new JLabel(info.getLast() + ""));
+		mtGoxPanel.add(new JLabel(""));
 		mtGoxPanel.add(new JLabel(" "));
 		mtGoxPanel.add(new HeaderLabel("Buy"));
 		mtGoxPanel.add(new JLabel(" "));		
-		mtGoxPanel.add(new JLabel(info.getBuy() + ""));
+		mtGoxPanel.add(new JLabel(""));
 		mtGoxPanel.add(new JLabel(" "));
 		mtGoxPanel.add(new HeaderLabel("Sell"));
 		mtGoxPanel.add(new JLabel(" "));		
-		mtGoxPanel.add(new JLabel(info.getSell() + ""));
+		mtGoxPanel.add(new JLabel(""));
 
 		subPanel.add("Mt. Gox", mtGoxPanel);
 
