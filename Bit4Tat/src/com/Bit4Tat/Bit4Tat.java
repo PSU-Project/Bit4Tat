@@ -14,6 +14,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.HashMap;
 import java.util.Hashtable;
+import java.util.StringTokenizer;
 
 import javax.swing.Box;
 import javax.swing.JButton;
@@ -31,22 +32,50 @@ public class Bit4Tat {
 	 * Please see the title COPYING in this distribution for license terms.
 	 * 
 	 */
-	static final String[] mtgox_userpass = {"Bit4Tat","mgbit4tat"};
+	//static final String[] mtgox_userpass = {"Bit4Tat","mgbit4tat"};
+	static final String[] mtgox_userpass = {"garbados","compsciisthebest!"};
 	static final String[] th_userpass = {"thayer3@pdx.edu","Bit4Tatth"};
 	static final String version = "1.0";
 	
-	static Hashtable<String, String[]> up;
+	static Hashtable<String, String[]> userpass;
 	
 	public static void main(String[] args) 
 	{			
 		// Welcome to Bit4Tat, the coolest evar
 		SchedulerGateway simpleScheduler = new DefaultScheduler();
 		
-		// instantiate wallet using username data
-		up = new Hashtable<String, String[]>();
-		up.put("mtgox", mtgox_userpass);
-		up.put("tradehill", th_userpass);
-		Wallet coinPurse = new Wallet(up);
+		// opens file containing username and passwords
+		WalletFileIO f = new WalletFileIO("wallet.csv");
+		f.openReader();
+		StringTokenizer tokenizer = f.getTokenizer(",");
+		// userpass file repeats "service, user, pass", so for every 3 items therein, there's a complete service.
+		userpass = new Hashtable<String, String[]>();
+		String service = "";
+		String[] account = new String[2];
+		try {
+			if (tokenizer.countTokens() == 0) throw (new Exception("empty"));
+			while (tokenizer.hasMoreTokens())
+			{
+				service = tokenizer.nextToken();
+				if ((service.equals("mtgox")) && (service.equals("tradehill"))) throw (new Exception("unknown service"));
+				account[0] = tokenizer.nextToken();
+				account[1] = tokenizer.nextToken();
+				userpass.put(service,account);
+			}
+		}
+		catch (Exception e) {
+			if (e.getMessage().equals("empty")) System.err.println("Wallet file is empty!");
+			else if (e.getMessage().equals("unknown service")) {
+				System.err.println("Unknown service!");
+				System.err.println(service);
+			}
+			else {
+				System.err.println(e.getMessage());
+				System.err.println(e);
+			}
+		}
+	
+		Wallet coinPurse = new Wallet(userpass);
 		
 		//coinPurse = simpleScheduler.pollBalance(coinPurse);
 		

@@ -45,6 +45,7 @@ public abstract class PaymentService
 	 * @return
 	 */
 	public abstract ResponseContainer checkBalance ();
+	public abstract ResponseContainer checkTicker ();
 	
 	public abstract void getOrders ();
 	
@@ -59,6 +60,4 @@ public abstract class PaymentService
 	{
 		return user;
 	}
-	
-	
 }

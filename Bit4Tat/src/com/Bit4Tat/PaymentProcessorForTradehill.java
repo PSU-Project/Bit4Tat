@@ -261,4 +261,10 @@ public class PaymentProcessorForTradehill extends PaymentService
 	*/
 		return conn;
 	}
+
+	@Override
+	public ResponseContainer checkTicker() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
