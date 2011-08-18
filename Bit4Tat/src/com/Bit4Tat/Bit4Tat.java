@@ -45,9 +45,7 @@ public class Bit4Tat {
 	 * 
 	 */
 	//static final String[] mtgox_userpass = {"Bit4Tat","mgbit4tat"};
-	static final String[] mtgox_userpass = {"garbados","compsciisthebest"};
-	static final String[] th_userpass = {"thayer3@pdx.edu","Bit4Tatth"};
-	static final String version = "1.0";
+    	static final String version = "1.0";
 	
 	static Hashtable<String, String[]> userpass;
 	
@@ -57,7 +55,7 @@ public class Bit4Tat {
 		SchedulerGateway simpleScheduler = new DefaultScheduler();
 		
 		// opens file containing username and passwords
-		WalletFileIO f = new WalletFileIO("wallet.csv");
+	        WalletFileIO f = new WalletFileIO("wallet.csv");
 		f.openReader();
 		StringTokenizer tokenizer = f.getTokenizer(",");
 		
